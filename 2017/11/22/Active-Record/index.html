@@ -44,6 +44,38 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -77,7 +109,7 @@
     root: '/',
     scheme: 'Muse',
     version: '6.0.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -114,7 +146,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/11/22/Active-Record/Active-Record/1.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/22/Active-Record/Active-Record/2.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/22/Active-Record/Active-Record/3.png">
-<meta property="og:updated_time" content="2017-11-23T03:22:13.924Z">
+<meta property="og:updated_time" content="2018-02-27T08:36:01.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Active Record 關聯式設計">
 <meta name="twitter:description" content="ActiveRecord是一種ORMORM(Object-Relational-Mapping)讓我們可以利用物件導向的概念來操作關聯式資料庫，不需要透過繁瑣的SQL語法就能達成同樣的效果，對於維護程式也是比較容易的。但根據 抽象滲漏法則 所述：所有重大的抽象機制在某種程式上都是有漏洞的。ActiveRecord簡化了我們操作SQL的方便性，但相對的其效率就不會比直接使用SQL來得高，且可能也有它">
@@ -274,7 +306,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -363,87 +395,27 @@
 </ul>
 <h1 id="關聯式資料庫基本操作"><a href="#關聯式資料庫基本操作" class="headerlink" title="關聯式資料庫基本操作"></a>關聯式資料庫基本操作</h1><h2 id="一對多關聯-one-to-many"><a href="#一對多關聯-one-to-many" class="headerlink" title="一對多關聯 one-to-many"></a>一對多關聯 one-to-many</h2><p><img src="Active-Record/1.png" alt="one-to-many"></p>
 <p>以活動分類Category與活動Event來表示一對多關係。一個活動分類下可以有很多個活動，但一個活動只能被歸類在一個活動分類之下。  </p>
-<h4 id="建立Model"><a href="#建立Model" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model category name:string   # 建立Category model
-rails g model event name:string date:date category_id:integer   # 建立Event model
-rails db:migrate   # 記得資料庫遷移</code></pre>  
-<p>如此一來就建立了Event與Category兩個model，在Event內我們建立了<code>category_id</code>作為foriegn key，用來連接兩個Model。但目前為止，我們還沒定義出兩者的關聯，還需要在兩個model中加入一些設定：<br><pre><code>class Category &lt; ApplicationRecord
-  has_many :events   # 記得要複數
-end
-
-class Event &lt; ApplicationRecord
-  belongs_to :category, optional =&gt; true   # 記得要單數                        
-end</code></pre><br><code>has_many</code>表達了此Model有一對多關係，而<code>belongs_to</code>表達了此Model有多對一關係。<br><code>optional =&gt; true</code>可以允許event沒有任何category的情況</p>
+<h4 id="建立Model"><a href="#建立Model" class="headerlink" title="建立Model"></a>建立Model</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Terminal運行</span></span><br><span class="line">rails g model category <span class="symbol">name:</span>string   <span class="comment"># 建立Category model</span></span><br><span class="line">rails g model event <span class="symbol">name:</span>string <span class="symbol">date:</span>date <span class="symbol">category_id:</span>integer   <span class="comment"># 建立Event model</span></span><br><span class="line">rails <span class="symbol">db:</span>migrate   <span class="comment"># 記得資料庫遷移</span></span><br></pre></td></tr></table></figure>
+<p>如此一來就建立了Event與Category兩個model，在Event內我們建立了<code>category_id</code>作為foriegn key，用來連接兩個Model。但目前為止，我們還沒定義出兩者的關聯，還需要在兩個model中加入一些設定：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Category</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:events</span>   <span class="comment"># 記得要複數</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:category</span>, optional =&gt; <span class="literal">true</span>   <span class="comment"># 記得要單數                        </span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><br><code>has_many</code>表達了此Model有一對多關係，而<code>belongs_to</code>表達了此Model有多對一關係。<br><code>optional =&gt; true</code>可以允許event沒有任何category的情況</p>
 <h4 id="建立Event物件"><a href="#建立Event物件" class="headerlink" title="建立Event物件"></a>建立Event物件</h4><p>假設已經建立了2個Category，若要再建立幾個與Category相關的Event物件，可以有以下作法  </p>
 <ol>
-<li>建立Event物件，並關聯到Category<pre><code>a = Event.new(name: &quot;BTD party&quot;, category: Category.first)
-# 或是 a = Event.new(name: &quot;BTD party&quot;, category_id: Category.first.id)
-a.save
-
-b = Event.create(name: &quot;Picnic&quot;)
-Category.first.events &lt;&lt; b</code></pre>  </li>
-<li>從Category中建立一個Event物件<pre><code>x = Category.first.events   # 回傳一個Array
-c = x.build(name: &quot;KTV&quot;)
-c.save
-
-d = x.create(name: &quot;Tennis game&quot;)   # 不需再save</code></pre>  
-<h4 id="查找物件"><a href="#查找物件" class="headerlink" title="查找物件"></a>查找物件</h4><pre><code>x = Category.first
-a = x.events.find(3)   # 查詢第一個分類下的活動中的第三個
-b = x.events.where(name: &quot;KTV&quot;)   # 1.查詢第一個分類中，叫作KTV的活動
-                                  # 2.回傳一個包含所有符合資格的資料的陣列，如果要找出其中的第一項，
-                                  # 就輸入 b[0]</code></pre>
-<h4 id="刪除物件"><a href="#刪除物件" class="headerlink" title="刪除物件"></a>刪除物件</h4><pre><code>x = Category.first
-x.events.destroy_all   # 一筆一筆刪除，並觸發每個event的destroy callback
-x.events.delete_all    # 一次刪除所有，不會觸發event的destroy callback</code></pre>
+<li>建立Event物件，並關聯到Category<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = Event.new(<span class="symbol">name:</span> <span class="string">"BTD party"</span>, <span class="symbol">category:</span> Category.first)</span><br><span class="line"><span class="comment"># 或是 a = Event.new(name: "BTD party", category_id: Category.first.id)</span></span><br><span class="line">a.save</span><br><span class="line"></span><br><span class="line">b = Event.create(<span class="symbol">name:</span> <span class="string">"Picnic"</span>)</span><br><span class="line">Category.first.events &lt;&lt; b</span><br></pre></td></tr></table></figure>  </li>
+<li>從Category中建立一個Event物件<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = Category.first.events   <span class="comment"># 回傳一個Array</span></span><br><span class="line">c = x.build(<span class="symbol">name:</span> <span class="string">"KTV"</span>)</span><br><span class="line">c.save</span><br><span class="line"></span><br><span class="line">d = x.create(<span class="symbol">name:</span> <span class="string">"Tennis game"</span>)   <span class="comment"># 不需再save</span></span><br></pre></td></tr></table></figure>  
+<h4 id="查找物件"><a href="#查找物件" class="headerlink" title="查找物件"></a>查找物件</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = Category.first</span><br><span class="line">a = x.events.find(<span class="number">3</span>)   <span class="comment"># 查詢第一個分類下的活動中的第三個</span></span><br><span class="line">b = x.events.where(<span class="symbol">name:</span> <span class="string">"KTV"</span>)   <span class="comment"># 1.查詢第一個分類中，叫作KTV的活動</span></span><br><span class="line">                                  <span class="comment"># 2.回傳一個包含所有符合資格的資料的陣列，如果要找出其中的第一項，</span></span><br><span class="line">                                  <span class="comment"># 就輸入 b[0]</span></span><br></pre></td></tr></table></figure>
+<h4 id="刪除物件"><a href="#刪除物件" class="headerlink" title="刪除物件"></a>刪除物件</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = Category.first</span><br><span class="line">x.events.destroy_all   <span class="comment"># 一筆一筆刪除，並觸發每個event的destroy callback</span></span><br><span class="line">x.events.delete_all    <span class="comment"># 一次刪除所有，不會觸發event的destroy callback</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
 <h2 id="一對一關聯-one-to-one"><a href="#一對一關聯-one-to-one" class="headerlink" title="一對一關聯 one-to-one"></a>一對一關聯 one-to-one</h2><p><img src="Active-Record/2.png" alt="one-to-one">  </p>
 <p>上圖的例子為，一個活動會對應到一個場地，而在此我們限定一個場地只能辦一場活動，因此屬於一對一關係。<br><strong>為什麼不把location列為Event的其中一個attribute就好？為什麼需要一對一關聯？</strong><br>因為有些attribute可能並不是每個row都有，或是他只有在較少的情況需要被查詢，那麼我們就不需要找每筆資料時都一定要連這些attribute一起找出來，這時就可以考慮將他們列為一對一關聯。  </p>
-<h4 id="建立Model-1"><a href="#建立Model-1" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model location name:string address:string event_id:integer   # 建立Location model
-rails db:migrate   # 記得資料庫遷移</code></pre>
-<p>Foriegn key要建立在哪一邊都可以。另外，一對一關聯同樣要建立關聯，才能在兩個Model之間心增一些方法來使用：<br><pre><code>class Event &lt; ApplicationRecord
-  has_one :location   # 記得要單數
-end
-
-class Location &lt; ApplicationRecord
-  belongs_to :event   # 記得要單數                        
-end</code></pre></p>
+<h4 id="建立Model-1"><a href="#建立Model-1" class="headerlink" title="建立Model"></a>建立Model</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Terminal運行</span></span><br><span class="line">rails g model location <span class="symbol">name:</span>string <span class="symbol">address:</span>string <span class="symbol">event_id:</span>integer   <span class="comment"># 建立Location model</span></span><br><span class="line">rails <span class="symbol">db:</span>migrate   <span class="comment"># 記得資料庫遷移</span></span><br></pre></td></tr></table></figure>
+<p>Foriegn key要建立在哪一邊都可以。另外，一對一關聯同樣要建立關聯，才能在兩個Model之間心增一些方法來使用：<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_one <span class="symbol">:location</span>   <span class="comment"># 記得要單數</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Location</span> &lt; ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:event</span>   <span class="comment"># 記得要單數                        </span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
 <h5 id="可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。"><a href="#可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。" class="headerlink" title="可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。"></a>可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。</h5><hr>
 <h2 id="多對多關聯-many-to-many"><a href="#多對多關聯-many-to-many" class="headerlink" title="多對多關聯 many-to-many"></a>多對多關聯 many-to-many</h2><p><img src="Active-Record/3.png" alt="many-to-many">  </p>
 <p>一個活動可以有多位參加者，且一個參加者也能參與多項活動，此為多對多關係。多對多的情況，需要在中間建立一個join table，並將兩者的foriegn key建立在此join table內，專門負責處理兩項多對多資料的關聯。  </p>
-<h4 id="建立Model-2"><a href="#建立Model-2" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model attendee name:string   # 建立Attendee model
-rails g model event_attendee event_id:integer attendee_id:integer   # 建立join table
-rails db:migrate   # 記得資料庫遷移</code></pre>
-<p>再來是建立關聯<br><pre><code>class Event &lt; ApplicationRecord
-  has_many :event_attendees   # 記得要複數
-  has_many :attendees, :through =&gt; :event_attendees
-end
-
-class EventAttendee &lt; ApplicationRecord
-  belongs_to :event   # 記得要單數   
-  belongs_to :attendee   # 記得要單數                     
-end
-
-class Attendee &lt; ApplicationRecord
-  has_many :event_attendees   # 記得要複數
-  has_many :events, :through =&gt; :event_attendees
-end</code></pre><br><code>:through =&gt;</code>可以將兩個資料表建立起多對多關聯  </p>
-<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><pre><code># 先建立物件
-a1 = Attendee.create(name: &quot;Lin&quot;)
-e1 = Event.create(name: &quot;BTD party&quot;, date: &quot;2017&#x2F;5&#x2F;3&quot;)
-e2 = Event.create(name: &quot;Picnic&quot;, date: &quot;2017&#x2F;11&#x2F;23&quot;)
-
-# 從join table建立兩者個關聯
-EventAttendee.create(event: e1, attendee: a1)
-EventAttendee.create(event: e2, attendee: a1)
-# 表示a1參加者參加了e1與e2活動
-
-# 查詢
-a1.events   # 查找a1參加的所有活動
-e1.attendees   # 查找參加e1的所有參加者</code></pre>
+<h4 id="建立Model-2"><a href="#建立Model-2" class="headerlink" title="建立Model"></a>建立Model</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Terminal運行</span></span><br><span class="line">rails g model attendee <span class="symbol">name:</span>string   <span class="comment"># 建立Attendee model</span></span><br><span class="line">rails g model event_attendee <span class="symbol">event_id:</span>integer <span class="symbol">attendee_id:</span>integer   <span class="comment"># 建立join table</span></span><br><span class="line">rails <span class="symbol">db:</span>migrate   <span class="comment"># 記得資料庫遷移</span></span><br></pre></td></tr></table></figure>
+<p>再來是建立關聯<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:event_attendees</span>   <span class="comment"># 記得要複數</span></span><br><span class="line">  has_many <span class="symbol">:attendees</span>, <span class="symbol">:through</span> =&gt; <span class="symbol">:event_attendees</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EventAttendee</span> &lt; ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:event</span>   <span class="comment"># 記得要單數   </span></span><br><span class="line">  belongs_to <span class="symbol">:attendee</span>   <span class="comment"># 記得要單數                     </span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Attendee</span> &lt; ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:event_attendees</span>   <span class="comment"># 記得要複數</span></span><br><span class="line">  has_many <span class="symbol">:events</span>, <span class="symbol">:through</span> =&gt; <span class="symbol">:event_attendees</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure><br><code>:through =&gt;</code>可以將兩個資料表建立起多對多關聯  </p>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先建立物件</span></span><br><span class="line">a1 = Attendee.create(<span class="symbol">name:</span> <span class="string">"Lin"</span>)</span><br><span class="line">e1 = Event.create(<span class="symbol">name:</span> <span class="string">"BTD party"</span>, <span class="symbol">date:</span> <span class="string">"2017/5/3"</span>)</span><br><span class="line">e2 = Event.create(<span class="symbol">name:</span> <span class="string">"Picnic"</span>, <span class="symbol">date:</span> <span class="string">"2017/11/23"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 從join table建立兩者個關聯</span></span><br><span class="line">EventAttendee.create(<span class="symbol">event:</span> e1, <span class="symbol">attendee:</span> a1)</span><br><span class="line">EventAttendee.create(<span class="symbol">event:</span> e2, <span class="symbol">attendee:</span> a1)</span><br><span class="line"><span class="comment"># 表示a1參加者參加了e1與e2活動</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查詢</span></span><br><span class="line">a1.events   <span class="comment"># 查找a1參加的所有活動</span></span><br><span class="line">e1.attendees   <span class="comment"># 查找參加e1的所有參加者</span></span><br></pre></td></tr></table></figure>
 <hr>
 <h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><ol>
 <li><a href="https://ihower.tw/rails/activerecord.html" target="_blank" rel="noopener">Ruby on Rails實戰聖經 - ActiveRecord 基本操作與關聯設計</a></li>
@@ -541,6 +513,8 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -559,6 +533,10 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/gpi.png"
+                alt="Lin Chia-Hung" />
             
               <p class="site-author-name" itemprop="name">Lin Chia-Hung</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -581,7 +559,7 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -594,7 +572,7 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
                     
                     <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">categories</span>
-                  
+                  </a>
                 </div>
               
 
@@ -602,7 +580,7 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -627,7 +605,7 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
                     
                     <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -635,6 +613,20 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qaz741012" target="_blank" title="Github"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/gpilin" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                  
+                </span>
+              
+            </div>
           
 
           

@@ -44,6 +44,38 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -77,7 +109,7 @@
     root: '/',
     scheme: 'Muse',
     version: '6.0.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -266,7 +298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -349,43 +381,16 @@
       
         
           
-            <h2 id="可以先參考「CSS-Grid與Bootstrap的比較」"><a href="#可以先參考「CSS-Grid與Bootstrap的比較」" class="headerlink" title="可以先參考「CSS-Grid與Bootstrap的比較」"></a>可以先參考「<a href="https://hackernoon.com/how-css-grid-beats-bootstrap-85d5881cf163" target="_blank" rel="noopener">CSS-Grid與Bootstrap的比較</a>」</h2><h4 id="以下整理幾個重點"><a href="#以下整理幾個重點" class="headerlink" title="以下整理幾個重點"></a>以下整理幾個重點</h4><ol>
-<li><strong>HTML內容更易閱讀</strong><br>套用Bootstrap會使得html檔案內的每個layout都需要自己的<code>&lt;div class=&quot;row&quot;&gt;</code>，尤其當網頁是RWD時，更需要放上冗長的套版。然而CSS-Grid並不會隨著layout的需求增多而使得html顯得更複雜(但當然比起Bootstrap就得撰寫css程式碼)。</li>
-<li><strong>流動性增加</strong><br>CSS-Grid讓網頁的layout能隨螢幕大小而流動，特別是能讓不同標籤的內容更換上下位置。若是套用Bootstrap，除非更改html文件的順序，否則layout是沒辦法上下互換的。</li>
-<li><strong>不再受限於12格</strong><br>當你想讓網頁中一行排列7個元件，Bootstrap的12格限制就會顯得麻煩，而CSS-Grid沒有這個限制。</li>
-<li><strong>幾乎所有瀏覽器都有支援</strong></li>
-</ol>
-<hr>
-<p>內容參考自<a href="https://scrimba.com/g/gR8PTE" target="_blank" rel="noopener">CSS-Grid教學</a></p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="初始設定"><a href="#初始設定" class="headerlink" title="初始設定"></a>初始設定</h3><p>假設有份html長這樣<br><pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;div&gt;1&lt;&#x2F;div&gt;
-  &lt;div&gt;2&lt;&#x2F;div&gt;
-  &lt;div&gt;3&lt;&#x2F;div&gt;
-  &lt;div&gt;4&lt;&#x2F;div&gt;
-  &lt;div&gt;5&lt;&#x2F;div&gt;
-  &lt;div&gt;6&lt;&#x2F;div&gt;
-&lt;&#x2F;div&gt;</code></pre><br>那我們能在CSS的部份做這樣的初始設定：<br><pre><code>.container {
-  display: gird;  &#x2F;*啟用CSS-Grid*&#x2F;
-  grid-template-columns: 100px auto;  &#x2F;*設定column兩個元件的寬度*&#x2F;
-  gird-template-rows: 50px 50px 200px;  &#x2F;*設定row三個元件的高度*&#x2F;
-  grid-gap: 3px;  &#x2F;*每個元件間的間隔*&#x2F;
-}</code></pre><br>若希望columns或rows能以等比例方式呈現：<br><pre><code>.container {
-  grid-template-columns: 1fr 2fr;  &#x2F;*column兩個元件以1:2呈現*&#x2F;
-  gird-template-rows: 2fr 1fr 3fr;  &#x2F;*row三個元件以2:1:3呈現*&#x2F;
-}</code></pre><br>平均等分：<br><pre><code>.container {
-  grid-template-columns: repeat(3, 1fr);  &#x2F;*避免重複輸入fr*&#x2F;
-  gird-template-rows: repeat(2, 50x);
-}</code></pre><br>將columns與rows合併的寫法：<br><pre><code>.container {
-  grid-template: repeat(2, 50x) &#x2F; repeat(3, 1fr);
-}</code></pre></p>
-<h3 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h3><p>有一html檔如下<br><pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;header&quot;&gt;HEADER&lt;&#x2F;div&gt;
-  &lt;div=&quot;menu&quot;&gt;MENU&lt;&#x2F;div&gt;
-  &lt;div class=&quot;content&quot;&gt;CONTENT&lt;&#x2F;div&gt;
-  &lt;div class=&quot;footer&quot;&gt;FOOTER&lt;&#x2F;div&gt;
-&lt;&#x2F;div&gt;</code></pre></p>
-
-          
+          可以先參考「CSS-Grid與Bootstrap的比較」以下整理幾個重點
+HTML內容更易閱讀套用Bootstrap會使得html檔案內的每個layout都需要自己的&lt;div class=&quot;row&quot;&gt;，尤其當網頁是RWD時，更需要放上冗長的套版。然而CSS-Grid並不會隨著layout的需求增多而使得html顯得更複雜(但當然比起Bootstrap就得撰寫css程
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/29/CSS-Grid/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -442,7 +447,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -525,103 +530,15 @@
       
         
           
-            <h3 id="ActiveRecord是一種ORM"><a href="#ActiveRecord是一種ORM" class="headerlink" title="ActiveRecord是一種ORM"></a>ActiveRecord是一種ORM</h3><p>ORM(Object-Relational-Mapping)讓我們可以利用物件導向的概念來操作關聯式資料庫，不需要透過繁瑣的SQL語法就能達成同樣的效果，對於維護程式也是比較容易的。但根據 <em>抽象滲漏法則</em> 所述：所有重大的抽象機制在某種程式上都是有漏洞的。ActiveRecord簡化了我們操作SQL的方便性，但相對的其效率就不會比直接使用SQL來得高，且可能也有它所無法涵蓋的範圍，甚至是漏洞。但站在網頁開發的角度，能夠快速建立網頁app以及易於處理複雜機制才是比較首要的，因此使用rails所提供的各種便利確實有其必要性。但永遠要記得，「唯一能適當處理漏洞的方法，就是弄懂該抽象原理以及所隱藏的東西。」<br>ActiveRecord將Ruby物件導向的概念套用到資料庫上運作，以下是其對應關係：</p>
-<ul>
-<li>class(a Model class) =&gt; table</li>
-<li>instances(a Model object) =&gt; rows</li>
-<li>attributes =&gt; columns</li>
-<li>class methods =&gt; operating the table</li>
-<li>instance methods =&gt; operating the row</li>
-</ul>
-<h1 id="關聯式資料庫基本操作"><a href="#關聯式資料庫基本操作" class="headerlink" title="關聯式資料庫基本操作"></a>關聯式資料庫基本操作</h1><h2 id="一對多關聯-one-to-many"><a href="#一對多關聯-one-to-many" class="headerlink" title="一對多關聯 one-to-many"></a>一對多關聯 one-to-many</h2><p><img src="Active-Record/1.png" alt="one-to-many"></p>
-<p>以活動分類Category與活動Event來表示一對多關係。一個活動分類下可以有很多個活動，但一個活動只能被歸類在一個活動分類之下。  </p>
-<h4 id="建立Model"><a href="#建立Model" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model category name:string   # 建立Category model
-rails g model event name:string date:date category_id:integer   # 建立Event model
-rails db:migrate   # 記得資料庫遷移</code></pre>  
-<p>如此一來就建立了Event與Category兩個model，在Event內我們建立了<code>category_id</code>作為foriegn key，用來連接兩個Model。但目前為止，我們還沒定義出兩者的關聯，還需要在兩個model中加入一些設定：<br><pre><code>class Category &lt; ApplicationRecord
-  has_many :events   # 記得要複數
-end
-
-class Event &lt; ApplicationRecord
-  belongs_to :category, optional =&gt; true   # 記得要單數                        
-end</code></pre><br><code>has_many</code>表達了此Model有一對多關係，而<code>belongs_to</code>表達了此Model有多對一關係。<br><code>optional =&gt; true</code>可以允許event沒有任何category的情況</p>
-<h4 id="建立Event物件"><a href="#建立Event物件" class="headerlink" title="建立Event物件"></a>建立Event物件</h4><p>假設已經建立了2個Category，若要再建立幾個與Category相關的Event物件，可以有以下作法  </p>
-<ol>
-<li>建立Event物件，並關聯到Category<pre><code>a = Event.new(name: &quot;BTD party&quot;, category: Category.first)
-# 或是 a = Event.new(name: &quot;BTD party&quot;, category_id: Category.first.id)
-a.save
-
-b = Event.create(name: &quot;Picnic&quot;)
-Category.first.events &lt;&lt; b</code></pre>  </li>
-<li>從Category中建立一個Event物件<pre><code>x = Category.first.events   # 回傳一個Array
-c = x.build(name: &quot;KTV&quot;)
-c.save
-
-d = x.create(name: &quot;Tennis game&quot;)   # 不需再save</code></pre>  
-<h4 id="查找物件"><a href="#查找物件" class="headerlink" title="查找物件"></a>查找物件</h4><pre><code>x = Category.first
-a = x.events.find(3)   # 查詢第一個分類下的活動中的第三個
-b = x.events.where(name: &quot;KTV&quot;)   # 1.查詢第一個分類中，叫作KTV的活動
-                                  # 2.回傳一個包含所有符合資格的資料的陣列，如果要找出其中的第一項，
-                                  # 就輸入 b[0]</code></pre>
-<h4 id="刪除物件"><a href="#刪除物件" class="headerlink" title="刪除物件"></a>刪除物件</h4><pre><code>x = Category.first
-x.events.destroy_all   # 一筆一筆刪除，並觸發每個event的destroy callback
-x.events.delete_all    # 一次刪除所有，不會觸發event的destroy callback</code></pre>
-</li>
-</ol>
-<hr>
-<h2 id="一對一關聯-one-to-one"><a href="#一對一關聯-one-to-one" class="headerlink" title="一對一關聯 one-to-one"></a>一對一關聯 one-to-one</h2><p><img src="Active-Record/2.png" alt="one-to-one">  </p>
-<p>上圖的例子為，一個活動會對應到一個場地，而在此我們限定一個場地只能辦一場活動，因此屬於一對一關係。<br><strong>為什麼不把location列為Event的其中一個attribute就好？為什麼需要一對一關聯？</strong><br>因為有些attribute可能並不是每個row都有，或是他只有在較少的情況需要被查詢，那麼我們就不需要找每筆資料時都一定要連這些attribute一起找出來，這時就可以考慮將他們列為一對一關聯。  </p>
-<h4 id="建立Model-1"><a href="#建立Model-1" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model location name:string address:string event_id:integer   # 建立Location model
-rails db:migrate   # 記得資料庫遷移</code></pre>
-<p>Foriegn key要建立在哪一邊都可以。另外，一對一關聯同樣要建立關聯，才能在兩個Model之間心增一些方法來使用：<br><pre><code>class Event &lt; ApplicationRecord
-  has_one :location   # 記得要單數
-end
-
-class Location &lt; ApplicationRecord
-  belongs_to :event   # 記得要單數                        
-end</code></pre></p>
-<h5 id="可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。"><a href="#可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。" class="headerlink" title="可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。"></a>可以將一對一關聯視作一對多關聯的特例情況，所以新增、操作的方法都與一對多相同。</h5><hr>
-<h2 id="多對多關聯-many-to-many"><a href="#多對多關聯-many-to-many" class="headerlink" title="多對多關聯 many-to-many"></a>多對多關聯 many-to-many</h2><p><img src="Active-Record/3.png" alt="many-to-many">  </p>
-<p>一個活動可以有多位參加者，且一個參加者也能參與多項活動，此為多對多關係。多對多的情況，需要在中間建立一個join table，並將兩者的foriegn key建立在此join table內，專門負責處理兩項多對多資料的關聯。  </p>
-<h4 id="建立Model-2"><a href="#建立Model-2" class="headerlink" title="建立Model"></a>建立Model</h4><pre><code># 在Terminal運行
-rails g model attendee name:string   # 建立Attendee model
-rails g model event_attendee event_id:integer attendee_id:integer   # 建立join table
-rails db:migrate   # 記得資料庫遷移</code></pre>
-<p>再來是建立關聯<br><pre><code>class Event &lt; ApplicationRecord
-  has_many :event_attendees   # 記得要複數
-  has_many :attendees, :through =&gt; :event_attendees
-end
-
-class EventAttendee &lt; ApplicationRecord
-  belongs_to :event   # 記得要單數   
-  belongs_to :attendee   # 記得要單數                     
-end
-
-class Attendee &lt; ApplicationRecord
-  has_many :event_attendees   # 記得要複數
-  has_many :events, :through =&gt; :event_attendees
-end</code></pre><br><code>:through =&gt;</code>可以將兩個資料表建立起多對多關聯  </p>
-<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><pre><code># 先建立物件
-a1 = Attendee.create(name: &quot;Lin&quot;)
-e1 = Event.create(name: &quot;BTD party&quot;, date: &quot;2017&#x2F;5&#x2F;3&quot;)
-e2 = Event.create(name: &quot;Picnic&quot;, date: &quot;2017&#x2F;11&#x2F;23&quot;)
-
-# 從join table建立兩者個關聯
-EventAttendee.create(event: e1, attendee: a1)
-EventAttendee.create(event: e2, attendee: a1)
-# 表示a1參加者參加了e1與e2活動
-
-# 查詢
-a1.events   # 查找a1參加的所有活動
-e1.attendees   # 查找參加e1的所有參加者</code></pre>
-<hr>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><ol>
-<li><a href="https://ihower.tw/rails/activerecord.html" target="_blank" rel="noopener">Ruby on Rails實戰聖經 - ActiveRecord 基本操作與關聯設計</a></li>
-</ol>
-
-          
+          ActiveRecord是一種ORMORM(Object-Relational-Mapping)讓我們可以利用物件導向的概念來操作關聯式資料庫，不需要透過繁瑣的SQL語法就能達成同樣的效果，對於維護程式也是比較容易的。但根據 抽象滲漏法則 所述：所有重大的抽象機制在某種程式上都是有漏洞的。ActiveRecord簡化了我們操作SQL的方便性，但相對的其效率就不會比直接使用SQL來得高，且可能也有它
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/22/Active-Record/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -678,7 +595,7 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -761,45 +678,17 @@ e1.attendees   # 查找參加e1的所有參加者</code></pre>
       
         
           
-            <h5 id="Matplotlib-讓-Data能夠以視覺化、圖像化的方式呈現。在這裡先介紹-matplotlib內的-pyplot-API，它強大的地方在於可以用簡單的函式就快速產生我們想要的圖像。"><a href="#Matplotlib-讓-Data能夠以視覺化、圖像化的方式呈現。在這裡先介紹-matplotlib內的-pyplot-API，它強大的地方在於可以用簡單的函式就快速產生我們想要的圖像。" class="headerlink" title="Matplotlib 讓 Data能夠以視覺化、圖像化的方式呈現。在這裡先介紹 matplotlib內的 pyplot API，它強大的地方在於可以用簡單的函式就快速產生我們想要的圖像。"></a>Matplotlib 讓 Data能夠以視覺化、圖像化的方式呈現。在這裡先介紹 matplotlib內的 pyplot API，它強大的地方在於可以用簡單的函式就快速產生我們想要的圖像。</h5><p>使用<code>import matplotlib.pyplot as plt</code>方式匯入pyplot模組</p>
-<h2 id="匯入資料及呈現"><a href="#匯入資料及呈現" class="headerlink" title="匯入資料及呈現"></a>匯入資料及呈現</h2><p>若已經俱備了x及y兩筆資料，那麼透過以下方式就能快速產生圖像：</p>
-<pre><code>plt.plot(x,y)   # 將x及y的資料內容匯入
-plt.show()       # 將資料呈現出來</code></pre>
-<h5 id="需特別注意，上面的plt-plot-是產生-line-chart的方法，若我們想產生scatter-chart則是輸入plt-scatter"><a href="#需特別注意，上面的plt-plot-是產生-line-chart的方法，若我們想產生scatter-chart則是輸入plt-scatter" class="headerlink" title="需特別注意，上面的plt.plot()是產生 line-chart的方法，若我們想產生scatter-chart則是輸入plt.scatter()"></a>需特別注意，上面的<code>plt.plot()</code>是產生 line-chart的方法，若我們想產生scatter-chart則是輸入<code>plt.scatter()</code></h5><h3 id="Histogram"><a href="#Histogram" class="headerlink" title="Histogram"></a>Histogram</h3><p>Histogram是最直接地看一筆數據的分佈的方式，若我有一筆班上學生成績的資料<code>grade</code>，透過輸入以下指令就能看見分佈：</p>
-<pre><code>plt.hist(grade)</code></pre>
-<p>pyplot會預設產生10個區塊，若想依情況調整區塊數量，則可加入bins參數：</p>
-<pre><code>plt.hist(grade, bins=5)</code></pre>
-<p>若有兩筆資料想要依序呈現，則需要清除第一筆資料後才能匯入第二筆，方法如下：</p>
-<pre><code>plt.hist(first)
-plt.show()
-plt.clf()   # 清除第一筆資料
-
-plt.hist(second)   # 匯入第二筆資料
-plt.show()   # 這樣就會改成呈現第二筆資料的圖像</code></pre>
-<h3 id="修改圖像的呈現方式"><a href="#修改圖像的呈現方式" class="headerlink" title="修改圖像的呈現方式"></a>修改圖像的呈現方式</h3><h4 id="Labels"><a href="#Labels" class="headerlink" title="Labels"></a>Labels</h4><ul>
-<li><code>plt.xlabel(year)</code> 定義x軸的資料名稱</li>
-<li><code>plt.ylabel(population)</code> 定義y軸的資料名稱</li>
-<li><code>plt.title(growth)</code> 命名該圖像的名稱</li>
-</ul>
-<p>上例就會呈現出一個x軸為年份、y軸為人口數量的人口成長圖。</p>
-<h4 id="Ticks"><a href="#Ticks" class="headerlink" title="Ticks"></a>Ticks</h4><p>若是想要修改x或y軸上資料呈現的名稱，就可以利用tick來修改。比如說原本x軸是1950,1960,1970三筆資料，我想改成民國年份的39,49,59，只需輸入以下程式：</p>
-<pre><code>plt.xticks([1950, 1960, 1970], [39, 49, 59])</code></pre>
-<p>第一項參數為原來的資料，第二項參數為預修改成的資料，兩個Array的內容是根據相同的index互相對照的。</p>
-<h4 id="Scatter"><a href="#Scatter" class="headerlink" title="Scatter"></a>Scatter</h4><ul>
-<li><code>plt.scatter(x, y, s=z)</code> 可將點狀圖中點的大小依據資料z變成不同的大小，資料愈大，點會愈大</li>
-<li><code>plt.scatter(x, y, c=col, alpha=0.8)</code> 則是可以將點變成不一樣的顏色，其中alpha為透明度。</li>
-</ul>
-<h5 id="上述的col也是一筆資料，比方說可能是一個含有每個國家對應到的洲的List，再透過一個dict來定義哪個洲會呈現哪個顏色。"><a href="#上述的col也是一筆資料，比方說可能是一個含有每個國家對應到的洲的List，再透過一個dict來定義哪個洲會呈現哪個顏色。" class="headerlink" title="上述的col也是一筆資料，比方說可能是一個含有每個國家對應到的洲的List，再透過一個dict來定義哪個洲會呈現哪個顏色。"></a>上述的col也是一筆資料，比方說可能是一個含有每個國家對應到的洲的List，再透過一個dict來定義哪個洲會呈現哪個顏色。</h5><ul>
-<li><code>plt.grid(True)</code> 可呈現出網格</li>
-<li><code>plt.text(x_index, y_index, content)</code> 可在自定義的位置放上想要說明的文字</li>
-</ul>
-<hr>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><ol>
-<li><a href="http://matplotlib.org/" target="_blank" rel="noopener">Matplotlib Tutorial</a></li>
-<li>Data Camp 課程： <a href="https://www.datacamp.com/courses/intermediate-python-for-data-science" target="_blank" rel="noopener">Intermediate Python for Data Science</a></li>
-</ol>
-
-          
+          Matplotlib 讓 Data能夠以視覺化、圖像化的方式呈現。在這裡先介紹 matplotlib內的 pyplot API，它強大的地方在於可以用簡單的函式就快速產生我們想要的圖像。使用import matplotlib.pyplot as plt方式匯入pyplot模組
+匯入資料及呈現若已經俱備了x及y兩筆資料，那麼透過以下方式就能快速產生圖像：
+plt.plot(x,y)   # 將x及y
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/21/Matplotlib/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -856,7 +745,7 @@ plt.show()   # 這樣就會改成呈現第二筆資料的圖像</code></pre>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -939,43 +828,15 @@ plt.show()   # 這樣就會改成呈現第二筆資料的圖像</code></pre>
       
         
           
-            <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>You are going to be given an <u>array of integers</u>(<strong>arr</strong>). Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N. If there is no index that would make this happen, return -1.</p>
-<p>Input:<br>An integer array of length <em>0 &lt; arr &lt; 1000</em>. The numbers in the array can be any integer positive or negative.</p>
-<p>Output:<br>The lowest index N where the side to the left of N is equal to the side to the right of N. If you do not find an index that fits these rules, then you will return -1.</p>
-<p>Note:<br>If you are given an array with multiple answers, return the lowest correct index.<br>An empty array should be treated like a 0 in this problem. (<a href="https://www.codewars.com/kata/equal-sides-of-an-array/train/python" target="_blank" rel="noopener">Link</a>)</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>為了避免重複計算，我想利用兩個變數，一個儲存某index前的總和，一個則是所有的總和。接著利用迴圈，看跑到哪個index，此index前的總和會等於他後面的總和(全部-前面)。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><pre><code>前面的總和 = 0
-for i in arr：
-  if前面的總和 = 所有總和 - 前面的總和
-    return 此index
-  若沒有，則前面的總和加上此項數字，繼續下一個迴圈
-若跑完都沒有符合，return -1
-</code></pre><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code>def find_even_index(arr):
-    temp = 0
-    total = 0
-    for i in arr:
-        total += i
-
-    for i in range(len(arr)):
-        if temp == total - temp - arr[i]: return i
-        temp += arr[i]
-    return -1               # Runtime: 161 ms</code></pre>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>先利用一個迴圈算出total，再利用第二個迴圈依序跑index，看看到哪一項會符合前總和等於後總和。</p>
-<p>此演算法的運作時間：</p>
-<ul>
-<li>兩次for-loop皆為O(n)</li>
-</ul>
-<p>整體Time complexity 為 O(n)</p>
-<hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><pre><code>def find_even_index(arr):
-    for i in range(len(arr)):
-        if sum(arr[:i]) == sum(arr[i+1:]):
-            return i
-    return -1              # Runtime: 176 ms</code></pre>
-<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>整體概念是一樣的，只是利用了<code>sum()</code>方法來加總List內的項目。但<code>sum()</code>其實會瀏覽整個list，所以他運作的時間是O(n)，而此方法將<code>sum()</code>擺在for-loop內不斷重複運算，整體的Time complexity是O(n<sup>2</sup>)的。在此例因為輸入的arr數量並不大，所以在運作時間上差異並不顯著，但當data龐大起來，這個方法的效率會比我寫的方法慢上許多。</p>
-<p>另外，在另一個人的解法當中提到，為了方便管理，其實一個函數不適合多個return。所以在我的方法中，若是能將<code>return i</code>及<code>return -1</code>改掉，先把<code>i</code>和<code>-1</code> assign給一個變數<code>result</code>，最後只需寫一次<code>return result</code>即可。</p>
-
-          
+          題目You are going to be given an array of integers(arr). Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the righ
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/10/Equal-Sides-Of-An-Array/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1032,7 +893,7 @@ for i in arr：
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1115,56 +976,15 @@ for i in arr：
       
         
           
-            <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>Bob is preparing to pass IQ test. The most frequent task in this test is to <em>find out which one of the given numbers differs from the others</em>. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number.</p>
-<p>Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from <em>1 (not 0)</em> (<a href="https://www.codewars.com/kata/iq-test/train/python" target="_blank" rel="noopener">Link</a>)</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>傳入的numbers是只用空格分開的連續字串，我想先把他們分開並只把數字的部份加入到新的list內，例如 “2 4 6 8 10” → [2, 4, 6, 8, 10]。接著依序檢查list內的各項是屬於odd或even，若與其他人不同則挑出，並回傳他在list中的位置。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><pre><code>arr = []
-for i in 傳入的字串
-  如果是空格
-    跳過
-  如果不是
-    加到arr內
-
-for i in arr
-  如果此項與前後項是不同性質的
-    回傳此項目的位置
-</code></pre><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code>def iq_test(numbers):
-    arr = []
-    ele = &#39;&#39;
-    for i in numbers:
-        if i == &#39; &#39;:
-            arr.append(int(ele))
-            ele = &#39;&#39;
-            continue
-        else:
-            ele += i
-    arr.append(int(ele))
-
-    for j in range(len(arr)-1):
-        if (arr[j-1]%2==0) != (arr[j]%2==0) != (arr[j+1]%2==0):
-            return j+1
-    return len(arr)               # Runtime: 144 ms</code></pre>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>第一個段落中，由於字串會被一個個字元檢視，若傳入的其中一個數字是兩位數(如10)，就可能被拆成’1’和’0’分別加入到arr內。所以在這裡使用ele來暫時儲存字元，只要還沒遇到空格，就會與下一個字元做字串的相加。</p>
-<p>第二個段落中，若目標項目在最後一項，可能會因為<code>arr[j+1]</code>而產生Index error，所以我只讓迴圈執行<code>range(len(arr)-1)</code>次，若迴圈結束還是沒找到目標，那麼就回傳最後一項。</p>
-<p>此演算法的運作時間：</p>
-<ul>
-<li>兩次for-loop皆為O(n)</li>
-<li>arr.append為O(1)</li>
-</ul>
-<p>整體Time complexity 為 O(n)</p>
-<hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><pre><code>def iq_test(numbers):
-    e = [int(i) % 2 == 0 for i in numbers.split()]
-    return e.index(True) + 1 if e.count(True) == 1 else e.index(False) + 1           # Runtime: 141 ms</code></pre>
-<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>我的code的第一段在做的事情與str.split()類似。此方法的功能如下：  </p>
-<p> <code>str.split(sep=None, maxsplit=-1)</code>  </p>
-<ul>
-<li>sep表示分割字元，預設為None，凡是’’, ‘ ‘, /n等代表None的都符合</li>
-<li>maxsplit表示分割次數，預設為-1，所以若沒有設定，就會一直分到字串結束為止</li>
-</ul>
-<p>接著以<code>%2 == 0</code>的條件來讓各個數字變為True或False，計算只有一個True或只有一個False的那一方，那就是目標了。</p>
-
-          
+          題目Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the oth
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/IQ-Test/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1221,7 +1041,7 @@ for i in arr
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1304,55 +1124,15 @@ for i in arr
       
         
           
-            <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>Given an <u>array of integers</u>(<strong>nums</strong>), return <em>indices</em> of the two numbers such that they add up to a <u>specific target</u>(<strong>target</strong>).<br>You may assume that each input would have <em>exactly</em> one solution, and you may not use the same element twice.    (<a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="noopener">Link</a>)</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>兩數相加= target，若兩數相同，則兩數都為target的一半；若兩數不同，則一個會大於target的一半，另一個會小於target的一半。所以第一個想法是先以(target/2)作為分界，將nums分成大於他及小於他的兩個array，然後從其中一個array的每個項目開始，看看是否能在另一個array中找到一個數字能相加後等於target。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><pre><code>a = target/2
-
-如果nums中有兩個a，那麼直接回傳這兩個數字在nums中的index
-
-如果沒有
-  x = 小於等於a的陣列
-  y = 大於a的陣列
-  從x的每項去運算，看看是否能在y中找到target-x，找到就回傳x及y子項目在nums中的index
-</code></pre><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code>def two_sum(nums, target)
-
-  a = target &#x2F; 2.0
-
-  if nums.count(a) == 2
-    index1 = nums.index(a)
-    nums[index1] = nil
-    index2 = nums.index(a)
-    return [index1, index2]
-  end
-
-  x = nums.select{|i| i &lt;= a}
-  y = nums.select{|i| i &gt; a}
-
-  (0...x.length).each do |i|
-    if y.include?(target - x[i])
-      return [nums.index(x[i]), nums.index(target - x[i])].sort
-    end
-  end  
-end                             # Runtime : 219 ms</code></pre>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>此演算法的運作時間：</p>
-<ul>
-<li><code>nums.count(a)</code>為O(n)</li>
-<li>兩次<code>nums.select</code>皆為O(n)</li>
-<li><code>each</code>迴圈裡包著<code>include?</code>，是為O(n<sup>2</sup>)  </li>
-</ul>
-<p>整體Time complexity 為 O(n<sup>2</sup>)</p>
-<hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><pre><code>def two_sum(nums, target)
-  search = {}
-
-  nums.each_with_index do |num, i|
-    return [search[targt-num], i] unless search[target-num].nil?
-    search[num] = i
-  end
-end                            # Runtime : 59 ms</code></pre>
-<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>利用Hash來儲存已經找尋過的num及他的index，如此一來就不需要寫兩個迴圈，只需往後找target-num是否存在Hash裡，就能知道答案了。由於<code>each</code>迴圈為O(n)，而Hashtable為O(1)，所以整體的Time complexity只有O(n)。</p>
-
-          
+          題目Given an array of integers(nums), return indices of the two numbers such that they add up to a specific target(target).You may assume that each input would have exactly one solution, and you may not
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/09/Two-Sum/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1409,7 +1189,7 @@ end                            # Runtime : 59 ms</code></pre>
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/gpi.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1492,36 +1272,16 @@ end                            # Runtime : 59 ms</code></pre>
       
         
           
-            <h5 id="Numpy-為Python提供了基礎的線性代數運算，包含了array-matrix-vector。加強了Python對於Big-data的處理能力與速度，也方便使用者進行統整，並深入做資料分析。"><a href="#Numpy-為Python提供了基礎的線性代數運算，包含了array-matrix-vector。加強了Python對於Big-data的處理能力與速度，也方便使用者進行統整，並深入做資料分析。" class="headerlink" title="Numpy 為Python提供了基礎的線性代數運算，包含了array, matrix, vector。加強了Python對於Big data的處理能力與速度，也方便使用者進行統整，並深入做資料分析。"></a>Numpy 為Python提供了基礎的線性代數運算，包含了array, matrix, vector。加強了Python對於Big data的處理能力與速度，也方便使用者進行統整，並深入做資料分析。</h5><p>使用<code>import numpy as np</code>方式匯入NumPy模組</p>
-<h2 id="Homogeneous-Multidimensional-Array"><a href="#Homogeneous-Multidimensional-Array" class="headerlink" title="Homogeneous Multidimensional Array"></a>Homogeneous Multidimensional Array</h2><p>這是NumPy 中最主要的資料結構。<strong>Homogeneous</strong> 表示陣列中的資料將是同一類型(大多是numbers)，<strong>Multidimensional</strong> 則顯示出這可以是N層的陣列。</p>
-<pre><code>import numpy as np
-x = [[1, 2, 3], [4, 5, 6]]
-np_x = np.array(x)
-print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
-<p>用<code>np.array()</code>來將List轉換為 <strong>ndarray</strong>，這裡的nd表示N-Dimensional，所以無論要創造多少層的array都可以。</p>
-<ul>
-<li><code>ndarray.ndim</code> : array的階層數，稱為 <strong>rank</strong>  </li>
-<li><code>ndarray.shape</code> : 顯示array的架構。若是matrix(2D)則以(row, column) tuple的方式呈現。而此tuple的長度即rank。</li>
-<li><code>ndarray.size</code> : 回傳array的elements總數</li>
-</ul>
-<p>以上面的np_x為例，他是一個rank = 2的array，也就是2D array。他有2個rows、3個columns，當想要選擇array中的某個項目，可以使用<code>np_x[row, column]</code>來進行選取。  </p>
-<p>像是<code>np_x[1,2]</code>就能選到6，因為他屬於第row=2, column=3(index由0開始)。</p>
-<p>而若想選出每個row的第一個column，則可以<code>np_x[:, 0]</code>來表示，將會回傳值為<code>[1,4]</code>的array。</p>
-<h2 id="Array-Creation"><a href="#Array-Creation" class="headerlink" title="Array Creation"></a>Array Creation</h2><p>除了上述的<code>np.array(list)</code>將List做轉換以外，還有以下幾個直接建立array的方法：</p>
-<ul>
-<li><code>np.zeros((2,3))</code> : 將創造一個被0.充滿，且row=2, column=3的array</li>
-<li><code>np.ones((2,3))</code> : 與上列相同，只是變成被1.充滿。 <em>特別注意：預設的dtype是float，可用<code>np.ones((2,3), dtype=int16)</code>將dtype轉為integer</em></li>
-<li><code>np.empty((2,3))</code> :將根據記憶體空間隨機產生內容</li>
-<li><code>np.arange(10, 30, 5)</code> : 與range類似，將得到array([10, 15, 20, 25])</li>
-<li><code>np.linspace(s, e, n)</code> : 包含s與e，在這之間產生n個數字，間隔相同。所以dtype會是float</li>
-</ul>
-<hr>
-<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><ol>
-<li><a href="https://docs.scipy.org/doc/numpy-dev/user/quickstart.html" target="_blank" rel="noopener">NumPy Tutorial</a></li>
-<li>Data Camp 課程： <a href="https://www.datacamp.com/courses/intro-to-python-for-data-science" target="_blank" rel="noopener">Intro to Python for Data Science</a></li>
-</ol>
-
-          
+          Numpy 為Python提供了基礎的線性代數運算，包含了array, matrix, vector。加強了Python對於Big data的處理能力與速度，也方便使用者進行統整，並深入做資料分析。使用import numpy as np方式匯入NumPy模組
+Homogeneous Multidimensional Array這是NumPy 中最主要的資料結構。Homogeneous 表示陣列中
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/08/NumPy/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1580,6 +1340,8 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
 
   <aside id="sidebar" class="sidebar">
     
+      <div id="sidebar-dimmer"></div>
+    
     <div class="sidebar-inner">
 
       
@@ -1589,6 +1351,10 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/gpi.png"
+                alt="Lin Chia-Hung" />
             
               <p class="site-author-name" itemprop="name">Lin Chia-Hung</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -1611,7 +1377,7 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -1624,7 +1390,7 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
                     
                     <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">categories</span>
-                  
+                  </a>
                 </div>
               
 
@@ -1632,7 +1398,7 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -1657,7 +1423,7 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
                     
                     <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -1665,6 +1431,20 @@ print(type(np_x))  #=&gt; &#39;numpy.ndarray&#39;</code></pre>
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qaz741012" target="_blank" title="Github"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/gpilin" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                  
+                </span>
+              
+            </div>
           
 
           
