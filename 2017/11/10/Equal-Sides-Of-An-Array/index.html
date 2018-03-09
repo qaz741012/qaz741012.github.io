@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Coding Noting">
 <meta property="og:description" content="題目You are going to be given an array of integers(arr). Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the righ">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-10T03:11:19.391Z">
+<meta property="og:updated_time" content="2018-02-27T08:36:56.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Equal Sides Of An Array">
 <meta name="twitter:description" content="題目You are going to be given an array of integers(arr). Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the righ">
@@ -225,7 +225,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Web Developer becoming...</p>
       
   </div>
 
@@ -386,22 +386,8 @@
 <p>Output:<br>The lowest index N where the side to the left of N is equal to the side to the right of N. If you do not find an index that fits these rules, then you will return -1.</p>
 <p>Note:<br>If you are given an array with multiple answers, return the lowest correct index.<br>An empty array should be treated like a 0 in this problem. (<a href="https://www.codewars.com/kata/equal-sides-of-an-array/train/python" target="_blank" rel="noopener">Link</a>)</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>為了避免重複計算，我想利用兩個變數，一個儲存某index前的總和，一個則是所有的總和。接著利用迴圈，看跑到哪個index，此index前的總和會等於他後面的總和(全部-前面)。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><pre><code>前面的總和 = 0
-for i in arr：
-  if前面的總和 = 所有總和 - 前面的總和
-    return 此index
-  若沒有，則前面的總和加上此項數字，繼續下一個迴圈
-若跑完都沒有符合，return -1
-</code></pre><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code>def find_even_index(arr):
-    temp = 0
-    total = 0
-    for i in arr:
-        total += i
-
-    for i in range(len(arr)):
-        if temp == total - temp - arr[i]: return i
-        temp += arr[i]
-    return -1               # Runtime: 161 ms</code></pre>
+<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">前面的總和 = 0</span><br><span class="line">for i in arr：</span><br><span class="line">  if前面的總和 = 所有總和 - 前面的總和</span><br><span class="line">    return 此index</span><br><span class="line">  若沒有，則前面的總和加上此項數字，繼續下一個迴圈</span><br><span class="line">若跑完都沒有符合，return -1</span><br></pre></td></tr></table></figure>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_even_index</span><span class="params">(arr)</span>:</span></span><br><span class="line">    temp = <span class="number">0</span></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">        total += i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">        <span class="keyword">if</span> temp == total - temp - arr[i]: <span class="keyword">return</span> i</span><br><span class="line">        temp += arr[i]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>               <span class="comment"># Runtime: 161 ms</span></span><br></pre></td></tr></table></figure>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>先利用一個迴圈算出total，再利用第二個迴圈依序跑index，看看到哪一項會符合前總和等於後總和。</p>
 <p>此演算法的運作時間：</p>
 <ul>
@@ -409,11 +395,7 @@ for i in arr：
 </ul>
 <p>整體Time complexity 為 O(n)</p>
 <hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><pre><code>def find_even_index(arr):
-    for i in range(len(arr)):
-        if sum(arr[:i]) == sum(arr[i+1:]):
-            return i
-    return -1              # Runtime: 176 ms</code></pre>
+<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_even_index</span><span class="params">(arr)</span></span><span class="symbol">:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr))<span class="symbol">:</span></span><br><span class="line">        <span class="keyword">if</span> sum(arr[<span class="symbol">:i</span>]) == sum(arr[i+<span class="number">1</span><span class="symbol">:</span>])<span class="symbol">:</span></span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>              <span class="comment"># Runtime: 176 ms</span></span><br></pre></td></tr></table></figure>
 <h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>整體概念是一樣的，只是利用了<code>sum()</code>方法來加總List內的項目。但<code>sum()</code>其實會瀏覽整個list，所以他運作的時間是O(n)，而此方法將<code>sum()</code>擺在for-loop內不斷重複運算，整體的Time complexity是O(n<sup>2</sup>)的。在此例因為輸入的arr數量並不大，所以在運作時間上差異並不顯著，但當data龐大起來，這個方法的效率會比我寫的方法慢上許多。</p>
 <p>另外，在另一個人的解法當中提到，為了方便管理，其實一個函數不適合多個return。所以在我的方法中，若是能將<code>return i</code>及<code>return -1</code>改掉，先把<code>i</code>和<code>-1</code> assign給一個變數<code>result</code>，最後只需寫一次<code>return result</code>即可。</p>
 
@@ -545,7 +527,7 @@ for i in arr：
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -599,7 +581,21 @@ for i in arr：
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -132,28 +132,28 @@
 
 
   
-  <meta name="keywords" content="Ruby,Algorithm,Leetcode," />
+  <meta name="keywords" content="Ruby,Ruby-on-Rails,ActiveRecord,SQLite," />
 
 
-<meta name="description" content="題目Given an array of integers(nums), return indices of the two numbers such that they add up to a specific target(target).You may assume that each input would have exactly one solution, and you may not">
-<meta name="keywords" content="Ruby,Algorithm,Leetcode">
+<meta name="description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
+<meta name="keywords" content="Ruby,Ruby-on-Rails,ActiveRecord,SQLite">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Two Sum">
-<meta property="og:url" content="http://yoursite.com/2017/11/09/Two-Sum/index.html">
+<meta property="og:title" content="解決在Rails資料表遷移中，&lt;br&gt;以non-null為條件進行add_column時會引發的錯誤">
+<meta property="og:url" content="http://yoursite.com/2018/03/01/adding-a-non-null-column-with-no-default-value-in-rails-migration/index.html">
 <meta property="og:site_name" content="Coding Noting">
-<meta property="og:description" content="題目Given an array of integers(nums), return indices of the two numbers such that they add up to a specific target(target).You may assume that each input would have exactly one solution, and you may not">
+<meta property="og:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-27T08:37:10.883Z">
+<meta property="og:updated_time" content="2018-03-01T15:27:49.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Two Sum">
-<meta name="twitter:description" content="題目Given an array of integers(nums), return indices of the two numbers such that they add up to a specific target(target).You may assume that each input would have exactly one solution, and you may not">
+<meta name="twitter:title" content="解決在Rails資料表遷移中，&lt;br&gt;以non-null為條件進行add_column時會引發的錯誤">
+<meta name="twitter:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/09/Two-Sum/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/01/adding-a-non-null-column-with-no-default-value-in-rails-migration/"/>
 
 
 
@@ -162,7 +162,7 @@
     sidebar: "",
   };
 </script>
-  <title>Two Sum | Coding Noting</title>
+  <title>解決在Rails資料表遷移中，<br>以non-null為條件進行add_column時會引發的錯誤 | Coding Noting</title>
   
 
 
@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/Two-Sum/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/adding-a-non-null-column-with-no-default-value-in-rails-migration/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Lin Chia-Hung">
@@ -314,7 +314,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Two Sum</h1>
+          <h1 class="post-title" itemprop="name headline">解決在Rails資料表遷移中，<br>以non-null為條件進行add_column時會引發的錯誤</h1>
         
 
         <div class="post-meta">
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-09T10:41:07+08:00">2017-11-09</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-01T22:11:11+08:00">2018-03-01</time>
             
 
             
@@ -347,7 +347,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithms-Thinking/" itemprop="url" rel="index"><span itemprop="name">Algorithms Thinking</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Ruby-on-Rails/" itemprop="url" rel="index"><span itemprop="name">Ruby-on-Rails</span></a></span>
 
                 
                 
@@ -381,20 +381,36 @@
       
 
       
-        <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>Given an <u>array of integers</u>(<strong>nums</strong>), return <em>indices</em> of the two numbers such that they add up to a <u>specific target</u>(<strong>target</strong>).<br>You may assume that each input would have <em>exactly</em> one solution, and you may not use the same element twice.    (<a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="noopener">Link</a>)</p>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>兩數相加= target，若兩數相同，則兩數都為target的一半；若兩數不同，則一個會大於target的一半，另一個會小於target的一半。所以第一個想法是先以(target/2)作為分界，將nums分成大於他及小於他的兩個array，然後從其中一個array的每個項目開始，看看是否能在另一個array中找到一個數字能相加後等於target。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = target/2</span><br><span class="line"></span><br><span class="line">如果nums中有兩個a，那麼直接回傳這兩個數字在nums中的index</span><br><span class="line"></span><br><span class="line">如果沒有</span><br><span class="line">  x = 小於等於a的陣列</span><br><span class="line">  y = 大於a的陣列</span><br><span class="line">  從x的每項去運算，看看是否能在y中找到target-x，找到就回傳x及y子項目在nums中的index</span><br></pre></td></tr></table></figure>
-<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_sum</span><span class="params">(nums, target)</span></span></span><br><span class="line"></span><br><span class="line">  a = target / <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> nums.count(a) == <span class="number">2</span></span><br><span class="line">    index1 = nums.index(a)</span><br><span class="line">    nums[index1] = <span class="literal">nil</span></span><br><span class="line">    index2 = nums.index(a)</span><br><span class="line">    <span class="keyword">return</span> [index1, index2]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  x = nums.select&#123;<span class="params">|i|</span> i &lt;= a&#125;</span><br><span class="line">  y = nums.select&#123;<span class="params">|i|</span> i &gt; a&#125;</span><br><span class="line"></span><br><span class="line">  (<span class="number">0</span>...x.length).each <span class="keyword">do</span> <span class="params">|i|</span></span><br><span class="line">    <span class="keyword">if</span> y.<span class="keyword">include</span>?(target - x[i])</span><br><span class="line">      <span class="keyword">return</span> [nums.index(x[i]), nums.index(target - x[i])].sort</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span>                             <span class="comment"># Runtime : 219 ms</span></span><br></pre></td></tr></table></figure>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>此演算法的運作時間：</p>
-<ul>
-<li><code>nums.count(a)</code>為O(n)</li>
-<li>兩次<code>nums.select</code>皆為O(n)</li>
-<li><code>each</code>迴圈裡包著<code>include?</code>，是為O(n<sup>2</sup>)  </li>
-</ul>
-<p>整體Time complexity 為 O(n<sup>2</sup>)</p>
+        <h2 id="什麼錯誤？"><a href="#什麼錯誤？" class="headerlink" title="什麼錯誤？"></a>什麼錯誤？</h2><p>若在新建一張資料表時，希望其中欄位不要有空值，可以在 <strong>建立時</strong> 輸入<code>null: false</code>以資料庫層級進行資料驗證。但若是在 <strong>已經存在</strong> 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。</p>
+<p>假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)</p>
+<table>
+  <tr>
+    <th colspan="2">User table</th>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+</table>
+
+<p>這時想要在欄位中加入gender，並指定不能為空值：
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">  add_column <span class="symbol">:users</span>, <span class="symbol">:gender</span>, <span class="symbol">:string</span>, <span class="symbol">null:</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>若是以上面方式進行migration，將會出現錯誤：
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot add a NOT NULL column with default value NULL</span><br></pre></td></tr></table></figure></p>
+<h2 id="為何產生錯誤？"><a href="#為何產生錯誤？" class="headerlink" title="為何產生錯誤？"></a>為何產生錯誤？</h2><p>SQLite在新增一個不能為空值的欄位時，會需要你順手設定他的default值；因為SQLite將欄位的default設為null，若這時限制新的欄位不能是null，卻又不給他其他default，將會產生矛盾，因此發生錯誤。</p>
+<h2 id="如何解決？"><a href="#如何解決？" class="headerlink" title="如何解決？"></a>如何解決？</h2><h3 id="1-圖法煉鋼，砍掉資料表重練"><a href="#1-圖法煉鋼，砍掉資料表重練" class="headerlink" title="1. 圖法煉鋼，砍掉資料表重練"></a>1. 圖法煉鋼，砍掉資料表重練</h3><p>若資料表內沒有資料，且沒有其他關聯，那砍掉可能比較快；但如果已經有其他資料，就沒辦法這樣子用了。</p>
+<h3 id="2-在User-Model中增加資料驗證"><a href="#2-在User-Model中增加資料驗證" class="headerlink" title="2. 在User Model中增加資料驗證"></a>2. 在User Model中增加資料驗證</h3><p>可以在 <em>model/user.rb</em> 內增加資料驗證：<code>validates_presence_of :gender</code>
+這是一個避開資料庫設定的方法，雖然也能擋掉gender是空值的情形，但資料庫層級與應用程式層級的驗證仍是不同的；若不是在資料庫中設限制，一旦應用程式轉換了就有可能讓資料出現空值，因此這個方法並沒有真正解決問題。</p>
+<h3 id="3-加入default值的設定"><a href="#3-加入default值的設定" class="headerlink" title="3. 加入default值的設定"></a>3. 加入default值的設定</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">  add_column <span class="symbol">:users</span>, <span class="symbol">:gender</span>, <span class="symbol">:string</span>, <span class="symbol">null:</span> <span class="literal">false</span>, <span class="symbol">default:</span> <span class="string">"male"</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>若過去的資料能夠有個固定的default，這將會是個好辦法；不過以性別的例子，就不會是個好方式。</p>
+<h3 id="4-先不設定null與default，之後在change-column"><a href="#4-先不設定null與default，之後在change-column" class="headerlink" title="4. 先不設定null與default，之後在change_column"></a>4. 先不設定null與default，之後在change_column</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span></span></span><br><span class="line">  add_column <span class="symbol">:users</span>, <span class="symbol">:gender</span>, <span class="symbol">:string</span></span><br><span class="line">  change_column <span class="symbol">:users</span>, <span class="symbol">:gender</span>, <span class="symbol">:string</span>, <span class="symbol">null:</span> <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>採取先新增欄位，再瞬間增加條件限制。能夠這樣做是因為SQLite對新增欄位較為嚴謹，算是一個繞過障礙的做法吧！</p>
+<h2 id="但如果資料表已經有資料了…"><a href="#但如果資料表已經有資料了…" class="headerlink" title="但如果資料表已經有資料了…"></a>但如果資料表已經有資料了…</h2><p>那就沒辦法了，只能讓歷史資料在該欄位先有值，再做新的資料表遷移了。</p>
 <hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_sum</span><span class="params">(nums, target)</span></span></span><br><span class="line">  search = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  nums.each_with_index <span class="keyword">do</span> <span class="params">|num, i|</span></span><br><span class="line">    <span class="keyword">return</span> [search[targt-num], i] <span class="keyword">unless</span> search[target-num].<span class="literal">nil</span>?</span><br><span class="line">    search[num] = i</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span>                            <span class="comment"># Runtime : 59 ms</span></span><br></pre></td></tr></table></figure>
-<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>利用Hash來儲存已經找尋過的num及他的index，如此一來就不需要寫兩個迴圈，只需往後找target-num是否存在Hash裡，就能知道答案了。由於<code>each</code>迴圈為O(n)，而Hashtable為O(1)，所以整體的Time complexity只有O(n)。</p>
+<h4 id="參考連結"><a href="#參考連結" class="headerlink" title="參考連結"></a>參考連結</h4><ol>
+<li><a href="http://strd6.com/2009/04/adding-a-non-null-column-with-no-default-value-in-a-rails-migration/" target="_blank" rel="noopener">Adding a Non-null Column with no Default Value in a Rails Migration</a></li>
+<li><a href="https://stackoverflow.com/questions/3170634/how-to-solve-cannot-add-a-not-null-column-with-default-value-null-in-sqlite3" target="_blank" rel="noopener">StackOverFlow: How to solve “Cannot add a NOT NULL column with default value NULL” in SQLite3</a></li>
+</ol>
 
       
     </div>
@@ -417,9 +433,11 @@
           
             <a href="/tags/Ruby/" rel="tag"># Ruby</a>
           
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+            <a href="/tags/Ruby-on-Rails/" rel="tag"># Ruby-on-Rails</a>
           
-            <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+            <a href="/tags/ActiveRecord/" rel="tag"># ActiveRecord</a>
+          
+            <a href="/tags/SQLite/" rel="tag"># SQLite</a>
           
         </div>
       
@@ -432,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/08/NumPy/" rel="next" title="NumPy">
-                <i class="fa fa-chevron-left"></i> NumPy
+              <a href="/2018/02/27/Exam1/" rel="next" title="求職考題-1">
+                <i class="fa fa-chevron-left"></i> 求職考題-1
               </a>
             
           </div>
@@ -441,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/09/IQ-Test/" rel="prev" title="IQ Test">
-                IQ Test <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -642,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#題目"><span class="nav-number">1.</span> <span class="nav-text">題目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pseudocode"><span class="nav-number">3.</span> <span class="nav-text">Pseudocode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考他人作法"><span class="nav-number">5.</span> <span class="nav-text">參考他人作法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析-1"><span class="nav-number">5.1.</span> <span class="nav-text">分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼錯誤？"><span class="nav-number">1.</span> <span class="nav-text">什麼錯誤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#為何產生錯誤？"><span class="nav-number">2.</span> <span class="nav-text">為何產生錯誤？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解決？"><span class="nav-number">3.</span> <span class="nav-text">如何解決？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-圖法煉鋼，砍掉資料表重練"><span class="nav-number">3.1.</span> <span class="nav-text">1. 圖法煉鋼，砍掉資料表重練</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-在User-Model中增加資料驗證"><span class="nav-number">3.2.</span> <span class="nav-text">2. 在User Model中增加資料驗證</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-加入default值的設定"><span class="nav-number">3.3.</span> <span class="nav-text">3. 加入default值的設定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-先不設定null與default，之後在change-column"><span class="nav-number">3.4.</span> <span class="nav-text">4. 先不設定null與default，之後在change_column</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#但如果資料表已經有資料了…"><span class="nav-number">4.</span> <span class="nav-text">但如果資料表已經有資料了…</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#參考連結"><span class="nav-number">4.0.1.</span> <span class="nav-text">參考連結</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

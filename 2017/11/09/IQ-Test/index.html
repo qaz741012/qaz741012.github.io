@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Coding Noting">
 <meta property="og:description" content="題目Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the oth">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-11-10T02:31:49.289Z">
+<meta property="og:updated_time" content="2018-02-27T08:37:01.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IQ Test">
 <meta name="twitter:description" content="題目Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the oth">
@@ -225,7 +225,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Web Developer becoming...</p>
       
   </div>
 
@@ -384,32 +384,8 @@
         <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>Bob is preparing to pass IQ test. The most frequent task in this test is to <em>find out which one of the given numbers differs from the others</em>. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number.</p>
 <p>Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from <em>1 (not 0)</em> (<a href="https://www.codewars.com/kata/iq-test/train/python" target="_blank" rel="noopener">Link</a>)</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>傳入的numbers是只用空格分開的連續字串，我想先把他們分開並只把數字的部份加入到新的list內，例如 “2 4 6 8 10” → [2, 4, 6, 8, 10]。接著依序檢查list內的各項是屬於odd或even，若與其他人不同則挑出，並回傳他在list中的位置。</p>
-<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><pre><code>arr = []
-for i in 傳入的字串
-  如果是空格
-    跳過
-  如果不是
-    加到arr內
-
-for i in arr
-  如果此項與前後項是不同性質的
-    回傳此項目的位置
-</code></pre><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><pre><code>def iq_test(numbers):
-    arr = []
-    ele = &#39;&#39;
-    for i in numbers:
-        if i == &#39; &#39;:
-            arr.append(int(ele))
-            ele = &#39;&#39;
-            continue
-        else:
-            ele += i
-    arr.append(int(ele))
-
-    for j in range(len(arr)-1):
-        if (arr[j-1]%2==0) != (arr[j]%2==0) != (arr[j+1]%2==0):
-            return j+1
-    return len(arr)               # Runtime: 144 ms</code></pre>
+<h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">arr = []</span><br><span class="line">for i in 傳入的字串</span><br><span class="line">  如果是空格</span><br><span class="line">    跳過</span><br><span class="line">  如果不是</span><br><span class="line">    加到arr內</span><br><span class="line"></span><br><span class="line">for i in arr</span><br><span class="line">  如果此項與前後項是不同性質的</span><br><span class="line">    回傳此項目的位置</span><br></pre></td></tr></table></figure>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iq_test</span><span class="params">(numbers)</span>:</span></span><br><span class="line">    arr = []</span><br><span class="line">    ele = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">if</span> i == <span class="string">' '</span>:</span><br><span class="line">            arr.append(int(ele))</span><br><span class="line">            ele = <span class="string">''</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ele += i</span><br><span class="line">    arr.append(int(ele))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(arr)<span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> (arr[j<span class="number">-1</span>]%<span class="number">2</span>==<span class="number">0</span>) != (arr[j]%<span class="number">2</span>==<span class="number">0</span>) != (arr[j+<span class="number">1</span>]%<span class="number">2</span>==<span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> j+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> len(arr)               <span class="comment"># Runtime: 144 ms</span></span><br></pre></td></tr></table></figure>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>第一個段落中，由於字串會被一個個字元檢視，若傳入的其中一個數字是兩位數(如10)，就可能被拆成’1’和’0’分別加入到arr內。所以在這裡使用ele來暫時儲存字元，只要還沒遇到空格，就會與下一個字元做字串的相加。</p>
 <p>第二個段落中，若目標項目在最後一項，可能會因為<code>arr[j+1]</code>而產生Index error，所以我只讓迴圈執行<code>range(len(arr)-1)</code>次，若迴圈結束還是沒找到目標，那麼就回傳最後一項。</p>
 <p>此演算法的運作時間：</p>
@@ -419,9 +395,7 @@ for i in arr
 </ul>
 <p>整體Time complexity 為 O(n)</p>
 <hr>
-<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><pre><code>def iq_test(numbers):
-    e = [int(i) % 2 == 0 for i in numbers.split()]
-    return e.index(True) + 1 if e.count(True) == 1 else e.index(False) + 1           # Runtime: 141 ms</code></pre>
+<h2 id="參考他人作法"><a href="#參考他人作法" class="headerlink" title="參考他人作法"></a>參考他人作法</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">iq_test</span><span class="params">(numbers)</span></span><span class="symbol">:</span></span><br><span class="line">    e = [int(i) % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> numbers.split()]</span><br><span class="line">    <span class="keyword">return</span> e.index(True) + <span class="number">1</span> <span class="keyword">if</span> e.count(True) == <span class="number">1</span> <span class="keyword">else</span> e.index(False) + <span class="number">1</span>           <span class="comment"># Runtime: 141 ms</span></span><br></pre></td></tr></table></figure>
 <h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><p>我的code的第一段在做的事情與str.split()類似。此方法的功能如下：  </p>
 <p> <code>str.split(sep=None, maxsplit=-1)</code>  </p>
 <ul>
@@ -558,7 +532,7 @@ for i in arr
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -612,7 +586,21 @@ for i in arr
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
