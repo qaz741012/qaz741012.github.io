@@ -143,7 +143,7 @@
 <meta property="og:site_name" content="Coding Noting">
 <meta property="og:description" content="從朋友那得到了一份求職的考題，範圍是網頁開發的後端操作：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-27T16:09:09.036Z">
+<meta property="og:updated_time" content="2018-03-09T17:52:31.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="求職考題-1">
 <meta name="twitter:description" content="從朋友那得到了一份求職的考題，範圍是網頁開發的後端操作：">
@@ -387,19 +387,42 @@
 </li>
 </ol>
 <hr>
-<h3 id="Ruby：class與module的區別？-至少包含用途、差了哪些method"><a href="#Ruby：class與module的區別？-至少包含用途、差了哪些method" class="headerlink" title="Ruby：class與module的區別？(至少包含用途、差了哪些method)"></a>Ruby：class與module的區別？(至少包含用途、差了哪些method)</h3><h4 id="Module是Class的superclass"><a href="#Module是Class的superclass" class="headerlink" title="Module是Class的superclass"></a>Module是Class的superclass</h4><p>Class除了繼承Module的method外，還多出了<code>[:new, :allocate, :superclass]</code>三個instance methods<a href="#ref">[1]</a>。由此可以得知Module的instance並沒有辦法建立新的instance以及繼承別的module。<br>所以若是在多個Class中都會用到的功能，會比較適合用Module來寫，等需要時再<code>include module_name</code>就可以了。</p>
+<h3 id="Ruby：class與module的區別？-至少包含用途、差了哪些method"><a href="#Ruby：class與module的區別？-至少包含用途、差了哪些method" class="headerlink" title="Ruby：class與module的區別？(至少包含用途、差了哪些method)"></a>Ruby：class與module的區別？(至少包含用途、差了哪些method)</h3><h4 id="Module是Class的superclass"><a href="#Module是Class的superclass" class="headerlink" title="Module是Class的superclass"></a>Module是Class的superclass</h4><p>Class除了繼承Module的method外，還多出了<code>[:new, :allocate, :superclass]</code>三個instance methods<a href="#ref">[1]</a>。由此可以得知Module的instance並沒有辦法建立新的instance以及繼承別的module。
+所以若是在多個Class中都會用到的功能，會比較適合用Module來寫，等需要時再<code>include module_name</code>就可以了。</p>
 <p>  <em>註：至於allocate方法，他與new都是Class創建新instance的方法，但allocate並不會調用initialize，也就是說 <strong>new其實就是allocate後再initialize</strong> 而已。若我們想建立一個沒有初始化的instance，就能考慮使用allocate。</em><a href="#ref">[2]</a></p>
 <hr>
-<h3 id="Ruby：為什麼-幾乎-所有東西都是物件？"><a href="#Ruby：為什麼-幾乎-所有東西都是物件？" class="headerlink" title="Ruby：為什麼(幾乎)所有東西都是物件？"></a>Ruby：為什麼(幾乎)所有東西都是物件？</h3><hr>
+<h3 id="Ruby：為什麼-幾乎-所有東西都是物件？"><a href="#Ruby：為什麼-幾乎-所有東西都是物件？" class="headerlink" title="Ruby：為什麼(幾乎)所有東西都是物件？"></a>Ruby：為什麼(幾乎)所有東西都是物件？</h3><blockquote>
+<p>“I wanted a scripting language that was more powerful than Perl, and more object-oriented than Python.”<br>– by Ruby發明人 Matz <a href="#ref">[3]</a></p>
+</blockquote>
+<p>這問題其實蠻弔詭的，我不明白出題人想問什麼。從Matz說的話可知道，Ruby在一開始被設計時就定位成一個「萬物即物件」的程式語言。因此如果想問的是「為什麼要把所有東西都變成物件」的話，可能問Matz本人會比較清楚；又如果是想問「把所有東西都變成物件有什麼好處」，又可以拿上面的OOP三大特性來回答。不過還是把Ruby萬物即物件這一點看到的資料做一些整理。</p>
+<h4 id="萬物即物件"><a href="#萬物即物件" class="headerlink" title="萬物即物件"></a>萬物即物件</h4><p>在大部分的程式語言裡，許多primitive value都不是物件，他們都是被定義好的、不能改變的資料型態，像是string、數字、boolean等等。但在Ruby裡，這些資料型態都可以被當作物件來使用。以<code>5.times</code>來說，就把數字當成物件，並且可以呼叫其方法。</p>
+<h4 id="所以我說…有什麼不是物件？"><a href="#所以我說…有什麼不是物件？" class="headerlink" title="所以我說…有什麼不是物件？"></a>所以我說…有什麼不是物件？</h4><p>以Stack Overflow上的回答來看<a href="#ref">[5]</a>，包含block、運算元、loop、條件式等等都不是物件。在為你自己學Ruby on Rails中<a href="#ref">[6]</a>也有提到，block並沒有辦法單獨存在，也無法assign給某個變數。如果要把block掛在方法上使用，可以在方法內寫上<code>yield</code>來將想傳遞的訊息傳給block執行；而也可以利用<code>Proc</code>將block物件化，像是：
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">greeting = Proc.new &#123; <span class="params">|name|</span> puts <span class="string">"Hello, <span class="subst">#&#123;name&#125;</span>!"</span>&#125;</span><br><span class="line">greeting.call(<span class="string">"Hung"</span>)   <span class="comment"># =&gt; Hello, Hung!</span></span><br></pre></td></tr></table></figure></p>
+<hr>
 <h3 id="列出七個你最常用的git指令，並簡述使用時機。"><a href="#列出七個你最常用的git指令，並簡述使用時機。" class="headerlink" title="列出七個你最常用的git指令，並簡述使用時機。"></a>列出七個你最常用的git指令，並簡述使用時機。</h3><hr>
 <h3 id="什麼是Monkey-patching？這種做法好嗎？"><a href="#什麼是Monkey-patching？這種做法好嗎？" class="headerlink" title="什麼是Monkey patching？這種做法好嗎？"></a>什麼是Monkey patching？這種做法好嗎？</h3><hr>
 <h3 id="Python：求下列程式碼的輸出值。"><a href="#Python：求下列程式碼的輸出值。" class="headerlink" title="Python：求下列程式碼的輸出值。"></a>Python：求下列程式碼的輸出值。</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, l=[])</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x):</span><br><span class="line">        l.append(i*i)</span><br><span class="line">    print(l)</span><br><span class="line"></span><br><span class="line">f(<span class="number">2</span>)</span><br><span class="line">f(<span class="number">3</span>, [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>])</span><br><span class="line">f(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一個參數x是必需要手動帶入的；而第二個參數l是個list，若沒有手動帶入則以預設的空list<code>[]</code>進行</li>
+<li>range(x)表示<code>[0, 1, ..., x-1]</code>的list</li>
+<li>append是list的一種方法，可以將參數放到list的最後一項</li>
+</ul>
+<p>答案：</p>
+<ol>
+<li><code>[0, 1]</code></li>
+<li><code>[3, 2, 1, 0, 1, 4]</code></li>
+<li><code>[0, 1, 0, 1, 4]</code>   (註： l會繼續存在在方法內，所以當執行完f(2)時，l就變成了[0, 1])</li>
+</ol>
 <hr>
 <h3 id="分別有User和Review-table。每個User可以留下複數的reviews。User的欄位有admin-boolean，true則為admin-，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。"><a href="#分別有User和Review-table。每個User可以留下複數的reviews。User的欄位有admin-boolean，true則為admin-，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。" class="headerlink" title="分別有User和Review table。每個User可以留下複數的reviews。User的欄位有admin(boolean，true則為admin)，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。"></a>分別有User和Review table。每個User可以留下複數的reviews。User的欄位有admin(boolean，true則為admin)，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。</h3><hr>
 <p></p><h4 id="ref">參考連結</h4><p></p>
 <ol>
 <li><a href="https://railsbook.tw/chapters/08-ruby-basic-4.html#a-namemoduleamodule" target="_blank" rel="noopener">為你自己學 Ruby on Rails - 類別與模組</a></li>
 <li><a href="https://stackoverflow.com/questions/13059552/classallocate-and-its-uses" target="_blank" rel="noopener">Class#allocate的使用時機及實際例子</a></li>
+<li><a href="http://www.linuxdevcenter.com/pub/a/linux/2001/11/29/ruby.html" target="_blank" rel="noopener">An Interview with the Creator of Ruby</a></li>
+<li><a href="https://www.ruby-lang.org/zh_tw/about/#fn2" target="_blank" rel="noopener">https://www.ruby-lang.org/zh_tw/about/#fn2</a></li>
+<li><a href="https://stackoverflow.com/questions/416047/examples-of-things-that-are-not-objects-in-ruby" target="_blank" rel="noopener">Examples of ‘Things’ that are not Objects in Ruby</a></li>
+<li><a href="https://railsbook.tw/chapters/07-ruby-basic-3.html#a-nameblockablock" target="_blank" rel="noopener">為你自己學Ruby on Rails - 方法與程式碼區塊(block)</a></li>
 </ol>
 
       
@@ -656,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OOP的三大特性是什麼？"><span class="nav-number">1.</span> <span class="nav-text">OOP的三大特性是什麼？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP的三大特性"><span class="nav-number">1.1.</span> <span class="nav-text">OOP的三大特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ruby：class與module的區別？-至少包含用途、差了哪些method"><span class="nav-number">2.</span> <span class="nav-text">Ruby：class與module的區別？(至少包含用途、差了哪些method)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Module是Class的superclass"><span class="nav-number">2.1.</span> <span class="nav-text">Module是Class的superclass</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ruby：為什麼-幾乎-所有東西都是物件？"><span class="nav-number">3.</span> <span class="nav-text">Ruby：為什麼(幾乎)所有東西都是物件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出七個你最常用的git指令，並簡述使用時機。"><span class="nav-number">4.</span> <span class="nav-text">列出七個你最常用的git指令，並簡述使用時機。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼是Monkey-patching？這種做法好嗎？"><span class="nav-number">5.</span> <span class="nav-text">什麼是Monkey patching？這種做法好嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python：求下列程式碼的輸出值。"><span class="nav-number">6.</span> <span class="nav-text">Python：求下列程式碼的輸出值。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分別有User和Review-table。每個User可以留下複數的reviews。User的欄位有admin-boolean，true則為admin-，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。"><span class="nav-number">7.</span> <span class="nav-text">分別有User和Review table。每個User可以留下複數的reviews。User的欄位有admin(boolean，true則為admin)，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ref"><span class="nav-number">7.1.</span> <span class="nav-text">參考連結</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OOP的三大特性是什麼？"><span class="nav-number">1.</span> <span class="nav-text">OOP的三大特性是什麼？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OOP的三大特性"><span class="nav-number">1.1.</span> <span class="nav-text">OOP的三大特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ruby：class與module的區別？-至少包含用途、差了哪些method"><span class="nav-number">2.</span> <span class="nav-text">Ruby：class與module的區別？(至少包含用途、差了哪些method)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Module是Class的superclass"><span class="nav-number">2.1.</span> <span class="nav-text">Module是Class的superclass</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ruby：為什麼-幾乎-所有東西都是物件？"><span class="nav-number">3.</span> <span class="nav-text">Ruby：為什麼(幾乎)所有東西都是物件？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#萬物即物件"><span class="nav-number">3.1.</span> <span class="nav-text">萬物即物件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#所以我說…有什麼不是物件？"><span class="nav-number">3.2.</span> <span class="nav-text">所以我說…有什麼不是物件？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出七個你最常用的git指令，並簡述使用時機。"><span class="nav-number">4.</span> <span class="nav-text">列出七個你最常用的git指令，並簡述使用時機。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼是Monkey-patching？這種做法好嗎？"><span class="nav-number">5.</span> <span class="nav-text">什麼是Monkey patching？這種做法好嗎？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python：求下列程式碼的輸出值。"><span class="nav-number">6.</span> <span class="nav-text">Python：求下列程式碼的輸出值。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分別有User和Review-table。每個User可以留下複數的reviews。User的欄位有admin-boolean，true則為admin-，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。"><span class="nav-number">7.</span> <span class="nav-text">分別有User和Review table。每個User可以留下複數的reviews。User的欄位有admin(boolean，true則為admin)，Review的欄位有content。請用SQL語法找出「所有為admin的user的評論內容」。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ref"><span class="nav-number">7.1.</span> <span class="nav-text">參考連結</span></a></li></ol></li></ol></div>
             
 
           </div>
