@@ -135,18 +135,18 @@
   <meta name="keywords" content="Python,MySQL,MySQLdb," />
 
 
-<meta name="description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+<meta name="description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！">
 <meta name="keywords" content="Python,MySQL,MySQLdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用mysqlclient模組作為Python DB-API來操作MySQL(未完)">
 <meta property="og:url" content="http://yoursite.com/2018/03/21/manipulate_MySQL_by_python3_with_mysqlclient_module/index.html">
 <meta property="og:site_name" content="Coding Noting">
-<meta property="og:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+<meta property="og:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-21T17:38:11.621Z">
+<meta property="og:updated_time" content="2018-03-21T17:40:43.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用mysqlclient模組作為Python DB-API來操作MySQL(未完)">
-<meta name="twitter:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+<meta name="twitter:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！">
 
 
 
@@ -381,7 +381,8 @@
       
 
       
-        <p>近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！</p>
+        <p>近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！
+<a id="more"></a></p>
 <h2 id="要準備什麼？"><a href="#要準備什麼？" class="headerlink" title="要準備什麼？"></a>要準備什麼？</h2><p>（假設你已經有安裝python3和pip3了）</p>
 <h4 id="1-安裝MySQL"><a href="#1-安裝MySQL" class="headerlink" title="1. 安裝MySQL"></a>1. 安裝MySQL</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[~]$ sudo apt-get install mysql-common mysql-client libmysqlclient-dev mysql-server</span><br><span class="line"># Terminal (Linux OS)</span><br></pre></td></tr></table></figure>
 <p>ps. 安裝期間會要求輸入密碼</p>

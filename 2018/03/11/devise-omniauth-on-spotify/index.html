@@ -135,19 +135,19 @@
   <meta name="keywords" content="Ruby,Ruby-on-Rails,Devise,OAuth,API," />
 
 
-<meta name="description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]  OAuth是Open Authorization的縮寫，中文稱作開放授權，他是一種標準，他讓使用者可以不用提供帳號密碼，授權第三方網路應">
+<meta name="description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]">
 <meta name="keywords" content="Ruby,Ruby-on-Rails,Devise,OAuth,API">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Devise整合OmniAuth實作第三認證 - Spotify帳號登入 (未完)">
 <meta property="og:url" content="http://yoursite.com/2018/03/11/devise-omniauth-on-spotify/index.html">
 <meta property="og:site_name" content="Coding Noting">
-<meta property="og:description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]  OAuth是Open Authorization的縮寫，中文稱作開放授權，他是一種標準，他讓使用者可以不用提供帳號密碼，授權第三方網路應">
+<meta property="og:description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2018/03/11/devise-omniauth-on-spotify/1.png">
-<meta property="og:updated_time" content="2018-03-21T14:25:28.870Z">
+<meta property="og:updated_time" content="2018-03-21T17:41:26.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Devise整合OmniAuth實作第三認證 - Spotify帳號登入 (未完)">
-<meta name="twitter:description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]  OAuth是Open Authorization的縮寫，中文稱作開放授權，他是一種標準，他讓使用者可以不用提供帳號密碼，授權第三方網路應">
+<meta name="twitter:description" content="OAuth An open protocol to allow secure authorization in a simple and standard method from web, mobile and desktop applications.[1]">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/11/devise-omniauth-on-spotify/1.png">
 
 
@@ -386,6 +386,7 @@
         <h2 id="OAuth"><a href="#OAuth" class="headerlink" title="OAuth"></a>OAuth</h2><blockquote>
 <p>An <strong>open protocol</strong> to allow <strong>secure authorization</strong> in a <strong>simple</strong> and <strong>standard</strong> method from web, mobile and desktop applications.<a href="#ref">[1]</a></p>
 </blockquote>
+<a id="more"></a>
 <p>OAuth是Open Authorization的縮寫，中文稱作開放授權，他是一種標準，他讓使用者可以不用提供帳號密碼，授權第三方網路應用程式(Consumer)登入原來的網路應用程式(Provider)；比如在Spotify內使用Facebook來登入，並不需要向Spotify提供帳號密碼。整個來來回回的運作流程可以參考<a href="#ref">[2]</a>。</p>
 <hr>
 <h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>整體的流程是按照Devise提供的<a href="https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview" target="_blank" rel="noopener">OmniAuth: Overview</a>來操作的。最最一開始就是要載入gem，並記得bundle

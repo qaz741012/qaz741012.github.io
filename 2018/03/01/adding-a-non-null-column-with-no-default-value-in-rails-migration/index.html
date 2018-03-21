@@ -135,18 +135,18 @@
   <meta name="keywords" content="Ruby,Ruby-on-Rails,ActiveRecord,SQLite," />
 
 
-<meta name="description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
+<meta name="description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。">
 <meta name="keywords" content="Ruby,Ruby-on-Rails,ActiveRecord,SQLite">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解決在Rails資料表遷移中，&lt;br&gt;以non-null為條件進行add_column時會引發的錯誤">
 <meta property="og:url" content="http://yoursite.com/2018/03/01/adding-a-non-null-column-with-no-default-value-in-rails-migration/index.html">
 <meta property="og:site_name" content="Coding Noting">
-<meta property="og:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
+<meta property="og:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-01T15:27:49.665Z">
+<meta property="og:updated_time" content="2018-03-21T17:41:49.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解決在Rails資料表遷移中，&lt;br&gt;以non-null為條件進行add_column時會引發的錯誤">
-<meta name="twitter:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。 假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)         User table           Name     Email      這時想">
+<meta name="twitter:description" content="什麼錯誤？若在新建一張資料表時，希望其中欄位不要有空值，可以在 建立時 輸入null: false以資料庫層級進行資料驗證。但若是在 已經存在 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。">
 
 
 
@@ -382,6 +382,7 @@
 
       
         <h2 id="什麼錯誤？"><a href="#什麼錯誤？" class="headerlink" title="什麼錯誤？"></a>什麼錯誤？</h2><p>若在新建一張資料表時，希望其中欄位不要有空值，可以在 <strong>建立時</strong> 輸入<code>null: false</code>以資料庫層級進行資料驗證。但若是在 <strong>已經存在</strong> 的資料表下，希望新增一欄不為空值的欄位時，就會引發錯誤。</p>
+<a id="more"></a>
 <p>假設有張資料表為User，其中已有name、email等欄位，但還沒有任何資料存入(如下表)</p>
 <table>
   <tr>
