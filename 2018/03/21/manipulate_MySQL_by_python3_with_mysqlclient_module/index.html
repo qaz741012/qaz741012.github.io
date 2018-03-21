@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Python,MySQL,MySQLdb," />
+
+
+<meta name="description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+<meta name="keywords" content="Python,MySQL,MySQLdb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用mysqlclient模組作為Python DB-API來操作MySQL(未完)">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/manipulate_MySQL_by_python3_with_mysqlclient_module/index.html">
+<meta property="og:site_name" content="Coding Noting">
+<meta property="og:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-21T17:38:11.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用mysqlclient模組作為Python DB-API來操作MySQL(未完)">
+<meta name="twitter:description" content="近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！ 要準備什麼？（假設你已經有安裝python3和pip3了） 1. 安裝MySQL12[~]$ sudo apt-get install mysql-common mysql">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/21/manipulate_MySQL_by_python3_with_mysqlclient_module/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>利用mysqlclient模組作為Python DB-API來操作MySQL(未完) | Coding Noting</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding Noting</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Web Developer becoming...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/manipulate_MySQL_by_python3_with_mysqlclient_module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lin Chia-Hung">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/gpi.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding Noting">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用mysqlclient模組作為Python DB-API來操作MySQL(未完)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T22:26:52+08:00">2018-03-21</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近期由於在忙一個Web APP，會需要用到爬蟲，並且要存到資料庫裡(剛好這個APP在雲端的資料庫是MySQL)，所以就開始研究怎麼爬蟲、怎麼存資料、怎麼操作MySQL…，東西一多就雜、變得難記，因此就把一些瑣碎的事情寫在這吧！</p>
+<h2 id="要準備什麼？"><a href="#要準備什麼？" class="headerlink" title="要準備什麼？"></a>要準備什麼？</h2><p>（假設你已經有安裝python3和pip3了）</p>
+<h4 id="1-安裝MySQL"><a href="#1-安裝MySQL" class="headerlink" title="1. 安裝MySQL"></a>1. 安裝MySQL</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[~]$ sudo apt-get install mysql-common mysql-client libmysqlclient-dev mysql-server</span><br><span class="line"># Terminal (Linux OS)</span><br></pre></td></tr></table></figure>
+<p>ps. 安裝期間會要求輸入密碼</p>
+<h4 id="2-安裝mysqlclient"><a href="#2-安裝mysqlclient" class="headerlink" title="2. 安裝mysqlclient"></a>2. 安裝mysqlclient</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[~]$ pip3 install mysqlclient</span><br><span class="line"># Terminal</span><br></pre></td></tr></table></figure>
+<h4 id="3-學會SQL！！！"><a href="#3-學會SQL！！！" class="headerlink" title="3. 學會SQL！！！"></a>3. 學會SQL！！！</h4><p>之前都是用Rails內建的Active Record來操作資料的，要我透過Rails存資料、拿資料、關聯都可以，但給我一筆資料要直接存入資料庫，沒有經過Rails我就掛了，就是因為不會SQL。那為什麼不在Rails中做爬蟲然後就可以透過Rails存資料呢？因為查了查資料，發現Ruby雖然可以爬，可是資源實在是很少，要學爬蟲還是用Python比較實在！  </p>
+<p>簡單介紹SQL</p>
+<blockquote>
+<p>SQL並不是一種API或是一種協定，而是一種宣告式語言，是關聯資料庫的通用語言。</p>
+</blockquote>
+<p>這是我在歐萊禮出版的<a href="http://www.books.com.tw/products/0010690075" target="_blank" rel="noopener">精通Python</a>內所看到的，個人覺得這本書很不錯，網路上的評價也很好。<br>SQL陳述式可以分為兩類：  </p>
+<ul>
+<li><strong>DDL(Data Definition Language)</strong>：負責處理建構與定義資料庫結構與管理資料庫權限，主要由CREATE、DROP、ALTER3個語法所組成  </li>
+<li><strong>DML(Data Manipulation Language)</strong>：資料的CRUD</li>
+</ul>
+<p>DDL基本指令  </p>
+<table>
+<thead>
+<tr>
+<th>動作</th>
+<th>SQL</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>建立資料庫</td>
+<td>CREATE DATABASE dbname</td>
+<td>CREATE DATABASE my_app</td>
+</tr>
+<tr>
+<td>選擇資料庫</td>
+<td>USE dbname</td>
+<td>Use my_app</td>
+</tr>
+<tr>
+<td>刪除資料庫與其資料表</td>
+<td>DROP DATABASE dbname</td>
+<td>DROP DATABASE my_app</td>
+</tr>
+<tr>
+<td>建立資料表</td>
+<td>CREATE TABLE tbname (column data-type)</td>
+<td>CREATE TABLE users (id INT, name VARCHAR(20), birthday DATE)</td>
+</tr>
+<tr>
+<td>刪除資料表與其資料</td>
+<td>DROP TABLE tbname</td>
+<td>DROP TABLE users</td>
+</tr>
+<tr>
+<td>清空資料內容(不會刪掉資料表)</td>
+<td>TRUNCATE TABLE tbname</td>
+<td>TRUNCATE TABLE users</td>
+</tr>
+</tbody>
+</table>
+<p>DML基本指令  </p>
+<table>
+<thead>
+<tr>
+<th>動作</th>
+<th>SQL</th>
+<th>範例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加入資料列</td>
+<td>INSERT INTO tbname VALUES(data)</td>
+<td>INSERT INTO users VALUES(1, ‘Qaz’, ‘1974-10-12’)</td>
+</tr>
+<tr>
+<td>選取資料</td>
+<td>SELECT column FROM tbname WHERE condition</td>
+<td>SELECT id,name FROM users WHERE id=1</td>
+</tr>
+<tr>
+<td>更新資料</td>
+<td>UPDATE tbname SET colume=value WHERE condition</td>
+<td>UPDATE users name=’Wsx’ WHERE id&gt;3</td>
+</tr>
+<tr>
+<td>刪除資料</td>
+<td>DELETE FROM tbname WHERE condition</td>
+<td>DELETE FROM users WHERE name!=’Qaz’</td>
+</tr>
+</tbody>
+</table>
+<p>然後其實上面的指令可以不用大寫沒關係，但我比較喜歡他大寫的樣子，比較好區分哪些是指令、哪些是我們要帶的</p>
+<h2 id="好了啦再來呢？"><a href="#好了啦再來呢？" class="headerlink" title="好了啦再來呢？"></a>好了啦再來呢？</h2><p>使用Python的DB-API有幾個通用的函式，讓我們可以存取各種關聯資料庫：</p>
+<ul>
+<li>connect()： 連結資料庫，可以傳入帳號、密碼、伺服器等參數</li>
+<li>cursor(): 建立一個cursor物件來處理SQL指令</li>
+<li>execute()與executemany()： 對資料庫執行一或多個SQL指令，是cursor物件的方法</li>
+<li>fetchone()、fetchmany()、fetchall()： 取得execute的結果</li>
+</ul>
+<p>操作流程<a href="#ref">[1]</a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .py</span></span><br><span class="line"><span class="keyword">import</span> MySQLdb  <span class="comment">#因為MySQLdb不支援python3，所以有開發者開發了python3能使用的mysqlclient，在import的時候仍然以MySQLdb為名，且操作和MySQLdb都相同</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 連接MySQL資料庫</span></span><br><span class="line">db = MySQLdb.connect(host=<span class="string">'localhost'</span>, user=<span class="string">'db_user'</span>, passwd=<span class="string">'db_passwd'</span>, db=<span class="string">'db_name'</span>, charset=<span class="string">'utf8'</span>) <span class="comment"># 最後一項若沒設定則取回的資料將無法以中文字顯示</span></span><br><span class="line">curs = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 執行MySQL指令</span></span><br><span class="line">cursor.execute(<span class="string">"放入MySQL指令"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取得結果</span></span><br><span class="line">cursor.fetchall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取得資料總筆數</span></span><br><span class="line">cursor.rowcount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 若有修改資料記得要做這個動作</span></span><br><span class="line">db.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 結束與資料庫的連結</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure></p>
+<h2 id="所以我說MySQL指令呢？"><a href="#所以我說MySQL指令呢？" class="headerlink" title="所以我說MySQL指令呢？"></a>所以我說MySQL指令呢？</h2><p>在上面是python透過mysqlclient操作MySQL的作法，操作中最重要的就是在execute裡輸入MySQL指令，而目前我們只知道一部份的SQL指令，對於MySQL指令是什麼並不知道。<br>MySQL是一個資料庫管理系統(DBMS)，除了支援SQL以外，還能透過某些指令進行資料庫操作權限的管理，像是設定使用者、密碼、管理使用者權限範圍等等。先不管權限的問題，就對資料的CRUD而言，MySQL的指令幾乎就和SQL一樣，因此就不贅述。以下就列出除了CRUD外，我認為重要且常用的指令<a href="#ref">[2]</a>。  </p>
+<table>
+<thead>
+<tr>
+<th>動作</th>
+<th>MySQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>以root身份進入MySQL console</td>
+<td>mysql -u root -p</td>
+</tr>
+<tr>
+<td>更新資料表名稱</td>
+<td>ALTER TABLE tbname1 RENAME tbname2;</td>
+</tr>
+<tr>
+<td>新增欄位</td>
+<td>ALTER TABLE tbname ADD column INT;</td>
+</tr>
+<tr>
+<td>修改欄位的資料型態</td>
+<td>ALTER TABLE tbname MODIFY column INT;</td>
+</tr>
+<tr>
+<td>修改欄位名稱與資料型態</td>
+<td>ALTER TABLE tbname CHANGE column1 column2 INT;</td>
+</tr>
+<tr>
+<td>刪除欄位</td>
+<td>ALTER TABLE tbname DROP column;</td>
+</tr>
+<tr>
+<td>顯示所有資料庫</td>
+<td>SHOW DATABASES;</td>
+</tr>
+<tr>
+<td>顯示該資料庫的所有資料表</td>
+<td>SHOW TABLES;</td>
+</tr>
+<tr>
+<td>顯示欄位資訊</td>
+<td>DESCRIBE tbname;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="還有幾個對資料庫設定也很重要的操作"><a href="#還有幾個對資料庫設定也很重要的操作" class="headerlink" title="還有幾個對資料庫設定也很重要的操作"></a>還有幾個對資料庫設定也很重要的操作</h2><h4 id="設定Primary-Key"><a href="#設定Primary-Key" class="headerlink" title="設定Primary Key"></a>設定Primary Key</h4><ul>
+<li>可以在一開始建立資料表時就設定：<code>CREATE TALBE tbname (id INT AUTO_INCREMENT, PRIMARY KEY (id));</code></li>
+<li>也可以在建立資料表後修改：<code>ALTER TABLE tbname ADD PRIMARY KEY (id);</code></li>
+</ul>
+<h4 id="設定AUOT-INCREMENT"><a href="#設定AUOT-INCREMENT" class="headerlink" title="設定AUOT_INCREMENT"></a>設定AUOT_INCREMENT</h4><p>預設會是從1開始遞增(2,3,4…)，但如果想更改起始數字的話可以<code>ALTER TABLE tbname AUTO_INCREMENT=start_number;</code></p>
+<h4 id="設定default與是否允許空值"><a href="#設定default與是否允許空值" class="headerlink" title="設定default與是否允許空值"></a>設定default與是否允許空值</h4><p><code>CREATE TABLE tbname (name NOT NULL DEFAULT &quot;Hi!&quot;)</code></p>
+<h4 id="設定建立時間："><a href="#設定建立時間：" class="headerlink" title="設定建立時間："></a>設定建立時間：</h4><p><code>ALTER TABLE tbname ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP</code></p>
+<h4 id="意外發現TRUNCATE-TABLE-tbname與DELETE-FROM-tbname的小差異"><a href="#意外發現TRUNCATE-TABLE-tbname與DELETE-FROM-tbname的小差異" class="headerlink" title="意外發現TRUNCATE TABLE tbname與DELETE FROM tbname的小差異"></a>意外發現<code>TRUNCATE TABLE tbname</code>與<code>DELETE FROM tbname</code>的小差異</h4><p>雖然同樣是把資料表清空，但<code>TRUNCATE</code>是把所有相關設定都刪除，而<code>DELETE</code>只是把資料拿掉而已；舉例來說，<code>TRUNCATE</code>後再新增資料，資料的PK會從1開始；而若是使用<code>DELETE</code>，則資料的PK會接續之前刪掉的繼續下去，並不會從頭開始。</p>
+<hr>
+<p></p><h4 id="ref">參考連結</h4><p></p>
+<ol>
+<li><a href="https://blog.gtwang.org/programming/python-mysqldb-connect-mysql-database-tutorial/" target="_blank" rel="noopener">MySQLdb的操作</a></li>
+<li><a href="http://blog.xuite.net/javax/programmer?st=c&amp;p=1&amp;w=64798" target="_blank" rel="noopener">MySQL的知識們</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/MySQLdb/" rel="tag"># MySQLdb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/11/devise-omniauth-on-spotify/" rel="next" title="使用Devise整合OmniAuth實作第三認證 - Spotify帳號登入 (未完)">
+                <i class="fa fa-chevron-left"></i> 使用Devise整合OmniAuth實作第三認證 - Spotify帳號登入 (未完)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/gpi.png"
+                alt="Lin Chia-Hung" />
+            
+              <p class="site-author-name" itemprop="name">Lin Chia-Hung</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qaz741012" target="_blank" title="Github"><i class="fa fa-fw fa-github"></i></a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/gpilin" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i></a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#要準備什麼？"><span class="nav-number">1.</span> <span class="nav-text">要準備什麼？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-安裝MySQL"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 安裝MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安裝mysqlclient"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 安裝mysqlclient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-學會SQL！！！"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 學會SQL！！！</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#好了啦再來呢？"><span class="nav-number">2.</span> <span class="nav-text">好了啦再來呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所以我說MySQL指令呢？"><span class="nav-number">3.</span> <span class="nav-text">所以我說MySQL指令呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#還有幾個對資料庫設定也很重要的操作"><span class="nav-number">4.</span> <span class="nav-text">還有幾個對資料庫設定也很重要的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#設定Primary-Key"><span class="nav-number">4.0.1.</span> <span class="nav-text">設定Primary Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#設定AUOT-INCREMENT"><span class="nav-number">4.0.2.</span> <span class="nav-text">設定AUOT_INCREMENT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#設定default與是否允許空值"><span class="nav-number">4.0.3.</span> <span class="nav-text">設定default與是否允許空值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#設定建立時間："><span class="nav-number">4.0.4.</span> <span class="nav-text">設定建立時間：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#意外發現TRUNCATE-TABLE-tbname與DELETE-FROM-tbname的小差異"><span class="nav-number">4.0.5.</span> <span class="nav-text">意外發現TRUNCATE TABLE tbname與DELETE FROM tbname的小差異</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref"><span class="nav-number">4.0.6.</span> <span class="nav-text">參考連結</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lin Chia-Hung</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

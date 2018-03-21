@@ -382,9 +382,12 @@
 
       
         <h2 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h2><p>You are going to be given an <u>array of integers</u>(<strong>arr</strong>). Your job is to take that array and find an index N where the sum of the integers to the left of N is equal to the sum of the integers to the right of N. If there is no index that would make this happen, return -1.</p>
-<p>Input:<br>An integer array of length <em>0 &lt; arr &lt; 1000</em>. The numbers in the array can be any integer positive or negative.</p>
-<p>Output:<br>The lowest index N where the side to the left of N is equal to the side to the right of N. If you do not find an index that fits these rules, then you will return -1.</p>
-<p>Note:<br>If you are given an array with multiple answers, return the lowest correct index.<br>An empty array should be treated like a 0 in this problem. (<a href="https://www.codewars.com/kata/equal-sides-of-an-array/train/python" target="_blank" rel="noopener">Link</a>)</p>
+<p>Input:
+An integer array of length <em>0 &lt; arr &lt; 1000</em>. The numbers in the array can be any integer positive or negative.</p>
+<p>Output:
+The lowest index N where the side to the left of N is equal to the side to the right of N. If you do not find an index that fits these rules, then you will return -1.</p>
+<p>Note:
+If you are given an array with multiple answers, return the lowest correct index.<br>An empty array should be treated like a 0 in this problem. (<a href="https://www.codewars.com/kata/equal-sides-of-an-array/train/python" target="_blank" rel="noopener">Link</a>)</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>為了避免重複計算，我想利用兩個變數，一個儲存某index前的總和，一個則是所有的總和。接著利用迴圈，看跑到哪個index，此index前的總和會等於他後面的總和(全部-前面)。</p>
 <h2 id="Pseudocode"><a href="#Pseudocode" class="headerlink" title="Pseudocode"></a>Pseudocode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">前面的總和 = 0</span><br><span class="line">for i in arr：</span><br><span class="line">  if前面的總和 = 所有總和 - 前面的總和</span><br><span class="line">    return 此index</span><br><span class="line">  若沒有，則前面的總和加上此項數字，繼續下一個迴圈</span><br><span class="line">若跑完都沒有符合，return -1</span><br></pre></td></tr></table></figure>
 <h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_even_index</span><span class="params">(arr)</span>:</span></span><br><span class="line">    temp = <span class="number">0</span></span><br><span class="line">    total = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">        total += i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">        <span class="keyword">if</span> temp == total - temp - arr[i]: <span class="keyword">return</span> i</span><br><span class="line">        temp += arr[i]</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>               <span class="comment"># Runtime: 161 ms</span></span><br></pre></td></tr></table></figure>
@@ -527,7 +530,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -539,6 +542,8 @@
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
+                    
+                      
                     
                       
                     
@@ -595,7 +600,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
